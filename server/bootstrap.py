@@ -41,7 +41,6 @@ class BootstrapNode(ChordNode):
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
 
-
     def handle_depart(self, departing_node_info: dict) -> dict:
         """
         Handles node departure and updates the ring.
