@@ -1,18 +1,17 @@
+from node import ChordNode
 import socket
 import threading
 import json
 import hashlib
 
+
 # Utility function for hashing keys using SHA1.
 def sha1_hash(key: str) -> int:
     return int(hashlib.sha1(key.encode()).hexdigest(), 16)
 
-class BootstrapNode:
+class BootstrapNode(ChordNode):
     def __init__(self, ip: str, port: int):
-        self.ip = ip
-        self.port = port
-        self.address = (self.ip, self.port)
-        self.node_id = sha1_hash(f"{ip}:{port}")
+        super().__init__(ip, port)
         print(f"[BOOTSTRAP] Starting bootstrap node with ID: {self.node_id} at {self.ip}:{self.port}")
         
         # Store nodes as dictionaries with keys: ip, port, node_id
@@ -23,45 +22,7 @@ class BootstrapNode:
         # Start server thread to listen for join requests.
         self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
-
-    def start_server(self):
-        """Listen for incoming join (and possibly other) requests."""
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind(self.address)
-        server_socket.listen(5)
-        print(f"[BOOTSTRAP] Listening on {self.ip}:{self.port} for join requests...")
-
-        while True:
-            client_socket, _ = server_socket.accept()
-            threading.Thread(target=self.handle_request, args=(client_socket,)).start()
-
-    def handle_request(self, client_socket: socket.socket):
-        try:
-            message = client_socket.recv(4096).decode()
-            if not message:
-                client_socket.close()
-                return
-            request = json.loads(message)
-            response = self.process_request(request)
-            client_socket.send(json.dumps(response).encode())
-        except Exception as e:
-            print(f"[BOOTSTRAP ERROR] {e}")
-        finally:
-            client_socket.close()
-
-    def process_request(self, request: dict) -> dict:
-        req_type = request.get("type")
-        node_info = request.get("node_info")
-
-        if req_type == "join":
-            return self.handle_join(node_info)
-        elif req_type == "depart":
-            return self.handle_depart(node_info)
-        elif req_type == "overlay":
-            return self.get_overlay()
-        else:
-            return {"status": "error", "message": "Unsupported request type"}
-
+    
     def handle_join(self, new_node_info: dict) -> dict:
         """
         Handles node joining, assigns predecessor and successor.
@@ -142,6 +103,19 @@ class BootstrapNode:
         except (socket.error, ConnectionRefusedError):
             return False
 
+    def process_request(self, request: dict) -> dict:
+        """Override request processing to include bootstrap-specific requests."""
+        req_type = request.get("type")
+        node_info = request.get("node_info")
+
+        if req_type == "join":
+            return self.handle_join(node_info)
+        elif req_type == "depart":
+            return self.handle_depart(node_info)
+        elif req_type == "overlay":
+            return self.get_overlay()
+        else:
+            return super().process_request(request)
 
 
 if __name__ == "__main__":

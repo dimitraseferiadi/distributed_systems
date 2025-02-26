@@ -47,6 +47,7 @@ class ChordNode:
         try:
             message = client_socket.recv(4096).decode()
             if not message:
+                client_socket.close()
                 return
             request = json.loads(message)
             response = self.process_request(request)
@@ -168,7 +169,8 @@ class ChordNode:
         print(f"[CLEANUP] Node {self.node_id} cleaning up state.")
         self.predecessor = None
         self.successor = None
-        
+    
+     
     def send_message(self, address, message):
         """Send a message to a given address but handle connection failures gracefully."""
         try:
