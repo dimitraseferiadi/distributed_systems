@@ -33,9 +33,9 @@ class BootstrapNode:
 
         while True:
             client_socket, _ = server_socket.accept()
-            threading.Thread(target=self.handle_nodes, args=(client_socket,)).start()
+            threading.Thread(target=self.handle_request, args=(client_socket,)).start()
 
-    def handle_nodes(self, client_socket: socket.socket):
+    def handle_request(self, client_socket: socket.socket):
         try:
             message = client_socket.recv(4096).decode()
             if not message:
@@ -85,16 +85,25 @@ class BootstrapNode:
         """
         Handles node departure and updates the ring.
         """
-        with self.lock:
-            self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_info["node_id"]]
+        departing_node_id = departing_node_info["node_id"]
+        print(f"[BOOTSTRAP] Node {departing_node_id} is departing.")
 
-        # Notify other nodes about the departure (this could be done by sending messages to predecessors and successors)
-        for node in self.nodes:
-            if node["node_id"] != departing_node_info["node_id"]:
-                self.send_message(node, {"type": "node_departed", "node": departing_node_info})
-        
-        print(f"[BOOTSTRAP] Node {departing_node_info['node_id']} departed. Updated nodes: {self.nodes}")
+        with self.lock:
+            # Find the departing node and remove it
+            self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_id]
+
+            # Update predecessor and successor of affected nodes
+            if self.nodes:
+                predecessor, successor = self.find_neighbors(departing_node_id)
+
+                if predecessor:
+                    self.send_message(predecessor, {"type": "update_successor", "node": successor})
+                if successor:
+                    self.send_message(successor, {"type": "update_predecessor", "node": predecessor})
+
+        print(f"[BOOTSTRAP] Updated node list after departure: {self.nodes}")
         return {"status": "success"}
+
     
     def find_neighbors(self, node_id: int):
         """
@@ -109,9 +118,31 @@ class BootstrapNode:
     
     def get_overlay(self) -> dict:
         """
-        Returns the current ring topology.
+        Returns the current ring topology, only including active nodes.
         """
-        return {"status": "success", "overlay": self.nodes}
+        active_nodes = []
+        for node in self.nodes:
+            if self.is_node_alive(node):
+                active_nodes.append(node)
+
+        with self.lock:
+            self.nodes = active_nodes  # Remove unreachable nodes
+
+        return {"status": "success", "overlay": active_nodes}
+
+    def is_node_alive(self, node: dict) -> bool:
+        """
+        Check if a node is still active by attempting a connection.
+        """
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1)  # Quick timeout to avoid long delays
+                s.connect((node["ip"], node["port"]))
+            return True
+        except (socket.error, ConnectionRefusedError):
+            return False
+
+
 
 if __name__ == "__main__":
     import sys

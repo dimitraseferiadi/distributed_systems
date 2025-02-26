@@ -56,7 +56,8 @@ class ChordNode:
             client_socket.close()
 
     def process_request(self, request: dict) -> dict:
-        """Process different types of incoming requests.
+        """
+        Process different types of incoming requests.
         The request should have a "type" field (e.g., insert, query, delete, join, depart)
         and any additional data needed for the operation.
         """
@@ -73,41 +74,6 @@ class ChordNode:
             return self.handle_depart(request["node_info"])
         return {"status": "error", "message": "Unknown request type"}
     
-
-    def insert(self, key: str, value: str) -> dict:
-        """Insert or update a key-value pair."""
-        hashed_key = sha1_hash(key)
-        self.data_store[hashed_key] = value if hashed_key not in self.data_store else self.data_store[hashed_key] + f", {value}"
-        print(f"[INSERT] Key: {key} (hash: {hashed_key}) inserted/updated with value: {value}")
-        return {"status": "success", "node_id": self.node_id}
-    
-
-    def query(self, key: str) -> dict:
-        """Query for a key (or all keys if key == '*')."""
-        if key == "*":
-            # Return all key-value pairs.
-            # For clarity, return keys in their original hashed format.
-            return {"status": "success", "data": self.data_store}
-        else:
-            hashed_key = sha1_hash(key)
-            value = self.data_store.get(hashed_key, None)
-            if value is not None:
-                print(f"[QUERY] Found key: {key} (hash: {hashed_key}) with value: {value}")
-                return {"status": "success", "value": value}
-            else:
-                print(f"[QUERY] Key: {key} (hash: {hashed_key}) not found.")
-                return {"status": "error", "message": "Key not found"}
-
-    def delete(self, key: str) -> dict:
-        """Delete a key-value pair."""
-        hashed_key = sha1_hash(key)
-        if hashed_key in self.data_store:
-            del self.data_store[hashed_key]
-            print(f"[DELETE] Key: {key} (hash: {hashed_key}) deleted.")
-            return {"status": "success", "node_id": self.node_id}
-        else:
-            print(f"[DELETE] Key: {key} (hash: {hashed_key}) not found for deletion.")
-            return {"status": "error", "message": "Key not found"}
 
     def join_ring(self):
         """Join the Chord ring by contacting the bootstrap node. """
@@ -130,7 +96,16 @@ class ChordNode:
                 print(f"[JOIN] Node {self.node_id} joined. Predecessor: {self.predecessor}, Successor: {self.successor}")
         except Exception as e:
             print(f"[ERROR] Failed to join the ring: {e}")
-
+    
+    def lookup(self, key: str):
+        hashed_key = sha1_hash(key)
+        if self.predecessor and self.predecessor[2] < hashed_key <= self.node_id:
+            return {"status": "success", "node": self.node_id, "message": "Responsible node found."}
+        return self.forward_request(self.successor, {"type": "lookup", "key": key})
+    
+    def forward_request(self, node, request):
+        return self.send_message((node[0], node[1]), request)
+    
     def depart(self):
         """
         Gracefully depart from the ring.
@@ -154,37 +129,37 @@ class ChordNode:
     def cleanup_local_state(self):
         """Clean up local state after departure."""
         # Update the predecessor and successor references, this node is now leaving
-        if self.predecessor:
-            print(f"[CLEANUP] Node {self.node_id} setting predecessor to None.")
-            self.predecessor = None
-        if self.successor:
-            print(f"[CLEANUP] Node {self.node_id} setting successor to None.")
-            self.successor = None
-    
+        print(f"[CLEANUP] Node {self.node_id} cleaning up state.")
+        self.predecessor = None
+        self.successor = None
+        
     def send_message(self, address, message):
-        """Send a message to a given address."""
+        """Send a message to a given address but handle connection failures gracefully."""
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 if isinstance(address, dict):
                     address = (address["ip"], address["port"])
+                #s.settimeout(3)  # Avoid hanging indefinitely
                 s.connect(address)
                 s.send(json.dumps(message).encode())
-        except Exception as e:
-            print(f"[ERROR] Failed to send message to {address}: {e}")
+            
+        except (socket.error, ConnectionRefusedError):
+            print(f"[WARNING] Could not contact {address}. The node may have already departed.")
 
+        
     def run(self):
-        """Start the node and join the ring."""
         threading.Thread(target=self.start_server, daemon=True).start()
         self.join_ring()
         while True:
             try:
-                cmd = input(f"[NODE {self.node_id}] \n Enter command (help for options): ").strip()
+                cmd = input(f"[NODE {self.node_id}] Enter command: ").strip()
                 if cmd == "depart":
                     self.depart()
+                elif cmd == "lookup":
+                    key = input("Enter key to lookup: ")
+                    print(self.lookup(key))
                 elif cmd == "help":
-                    print("Available commands: depart")
-                else:
-                    print("Unknown command. Type 'help' for options.")
+                    print("Commands: depart, lookup, help")
             except KeyboardInterrupt:
                 print("\n[EXIT] Shutting down node.")
                 break
