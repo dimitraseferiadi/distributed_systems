@@ -42,12 +42,13 @@ class ChordNode:
             except Exception as e:
                 print(f"[ERROR] Server error: {e}")
 
-    
-
     def handle_request(self, client_socket):
         """Handle incoming requests from other nodes or clients."""
         try:
-            request = json.loads(client_socket.recv(4096).decode())
+            message = client_socket.recv(4096).decode()
+            if not message:
+                return
+            request = json.loads(message)
             response = self.process_request(request)
             client_socket.send(json.dumps(response).encode())
         except Exception as e:
@@ -74,7 +75,41 @@ class ChordNode:
             return self.handle_depart(request["node_info"])
         return {"status": "error", "message": "Unknown request type"}
     
+    def insert(self, key: str, value: str) -> dict:
+        """Insert or update a key-value pair."""
+        hashed_key = sha1_hash(key)
+        self.data_store[hashed_key] = value if hashed_key not in self.data_store else self.data_store[hashed_key] + f", {value}"
+        print(f"[INSERT] Key: {key} (hash: {hashed_key}) inserted/updated with value: {value}")
+        return {"status": "success", "node_id": self.node_id}
+    
 
+    def query(self, key: str) -> dict:
+        """Query for a key (or all keys if key == '*')."""
+        if key == "*":
+            # Return all key-value pairs.
+            # For clarity, return keys in their original hashed format.
+            return {"status": "success", "data": self.data_store}
+        else:
+            hashed_key = sha1_hash(key)
+            value = self.data_store.get(hashed_key, None)
+            if value is not None:
+                print(f"[QUERY] Found key: {key} (hash: {hashed_key}) with value: {value}")
+                return {"status": "success", "value": value}
+            else:
+                print(f"[QUERY] Key: {key} (hash: {hashed_key}) not found.")
+                return {"status": "error", "message": "Key not found"}
+
+    def delete(self, key: str) -> dict:
+        """Delete a key-value pair."""
+        hashed_key = sha1_hash(key)
+        if hashed_key in self.data_store:
+            del self.data_store[hashed_key]
+            print(f"[DELETE] Key: {key} (hash: {hashed_key}) deleted.")
+            return {"status": "success", "node_id": self.node_id}
+        else:
+            print(f"[DELETE] Key: {key} (hash: {hashed_key}) not found for deletion.")
+            return {"status": "error", "message": "Key not found"}
+        
     def join_ring(self):
         """Join the Chord ring by contacting the bootstrap node. """
         print(f"[JOIN] Node {self.node_id} attempting to join via bootstrap {self.bootstrap_ip}:{self.bootstrap_port}")
@@ -90,6 +125,7 @@ class ChordNode:
                 }
                 s.send(json.dumps(request).encode())
                 response = json.loads(s.recv(4096).decode())
+                
                 # Process the response to set successor and predecessor
                 self.predecessor = response.get("predecessor")
                 self.successor = response.get("successor")
