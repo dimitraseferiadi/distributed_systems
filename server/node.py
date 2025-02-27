@@ -17,6 +17,8 @@ class ChordNode:
         self.predecessor = None
         self.successor = None  # Initially, self is the only node in the ring.
         self.data_store = {}  # <key: hashed_key, value: value> dictionary for key-value pairs
+        
+        self.replication_factor = 1
 
         # Bootstrap node information for joining the ring.
         self.bootstrap_ip = bootstrap_ip
@@ -74,15 +76,106 @@ class ChordNode:
             return self.handle_join(request["node_info"])
         elif req_type == "depart":
             return self.handle_depart(request["node_info"])
+        elif req_type == "find_successor":
+            successor = self.find_successor(request["node_id"])
+            return {"status": "success", "successor": successor}
+        elif req_type == "update_predecessor":
+            self.update_predecessor(request["node"])
+            return {"status": "success"}
         return {"status": "error", "message": "Unknown request type"}
     
     def insert(self, key: str, value: str) -> dict:
-        """Insert or update a key-value pair."""
-        hashed_key = sha1_hash(key)
-        self.data_store[hashed_key] = value if hashed_key not in self.data_store else self.data_store[hashed_key] + f", {value}"
-        print(f"[INSERT] Key: {key} (hash: {hashed_key}) inserted/updated with value: {value}")
-        return {"status": "success", "node_id": self.node_id}
+        """Insert a key-value pair into the correct node."""
+        key_id = sha1_hash(key)
+        print(f"[INSERT] Key: {key} → Hash ID: {key_id}")
+
+        print(f"[DEBUG] Node {self.node_id} - Predecessor: {self.predecessor}, Successor: {self.successor}")
+
+        # Check if this node is responsible for storing the key
+        if self.is_responsible_for_key(key_id):
+            self.data_store[key_id] = value  # Store using the hashed key
+            print(f"[INSERT] Stored at Node {self.node_id}: {key} → {value}")
+            return {"status": "success", "node": self.node_id, "message": "Key stored"}
+
+        print(f"[DEBUG] Forwarding key {key} (ID: {key_id}) to successor at {successor_ip}:{successor_port}")
+
+        # Otherwise, forward the request to the correct node
+        successor_ip, successor_port, _ = self.find_successor(key_id)
+        if (successor_ip, successor_port) == (self.ip, self.port):  # Safety check
+            print(f"[WARNING] Unexpected self-reference in successor lookup! Storing locally.")
+            self.data_store[key_id] = value
+            return {"status": "success", "node": self.node_id, "message": "Key stored locally as a fallback"}
+
+        response = self.send_message((successor_ip, successor_port), {
+            "type": "insert",
+            "key": key,
+            "value": value
+        })
+
+        return response if response else {"status": "error", "message": "Failed to store key"}
+
+    def is_responsible_for_key(self, key_id):
+        """Check if this node is responsible for storing the given key."""
+        if self.predecessor is None:
+            return True  # If there's no predecessor, this node is alone in the ring.
+
+        pred_id = self.predecessor[2]  # Predecessor node ID
+
+        # Handle normal case (no wrap-around)
+        if pred_id < self.node_id:
+            return pred_id < key_id <= self.node_id
+        
+        # Handle wrap-around case (e.g., predecessor is larger than node_id)
+        return key_id > pred_id or key_id <= self.node_id
     
+    def find_successor(self, node_id):
+        """Find the successor of a given node ID in the ring."""
+
+        if isinstance(self.successor, dict):
+            self.successor = (self.successor["ip"], self.successor["port"], self.successor["node_id"])
+        elif isinstance(self.successor, list):
+            self.successor = tuple(self.successor)
+
+        # If there's only one node, it must be its own successor
+        if self.successor is None or self.successor == (self.ip, self.port, self.node_id):
+            return (self.ip, self.port, self.node_id)
+
+        # Check if the requested ID belongs to this node's range
+        if self.node_id < node_id <= self.successor[2]:
+            return self.successor  # This node is the correct successor
+
+        # Forward the request to the closest preceding node
+        next_node = self.closest_preceding_node(node_id)
+        if not next_node:
+            return self.successor  # Fallback if no better node
+
+        response = self.send_message((next_node[0], next_node[1]), {
+            "type": "find_successor",
+            "node_id": node_id
+        })
+
+        new_successor = response.get("successor", self.successor)
+        if isinstance(new_successor, list):
+            new_successor = tuple(new_successor)
+
+        return new_successor
+    
+    def closest_preceding_node(self, node_id):
+        """Returns the closest known node to the given ID"""
+        return self.successor  # Temporary logic, later use a finger table
+
+    def update_predecessor(self, node_info):
+        new_pred_id = node_info["node_id"]
+
+        print(f"predecessor is {self.predecessor}")
+
+        # Only update if it's a valid new predecessor
+        if self.predecessor is None or (self.predecessor[2] < new_pred_id < self.node_id) or \
+        (self.predecessor[2] > self.node_id and (new_pred_id > self.predecessor[2] or new_pred_id < self.node_id)):
+            self.predecessor = (node_info["ip"], node_info["port"], new_pred_id)
+            print(f"[UPDATE] New predecessor set to: {self.predecessor}")
+        else:
+            print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
 
     def query(self, key: str) -> dict:
         """Query for a key (or all keys if key == '*')."""
@@ -110,13 +203,17 @@ class ChordNode:
         else:
             print(f"[DELETE] Key: {key} (hash: {hashed_key}) not found for deletion.")
             return {"status": "error", "message": "Key not found"}
-        
+                
     def join_ring(self):
-        """Join the Chord ring by contacting the bootstrap node. """
+        """Join the Chord ring by contacting the bootstrap node."""
         print(f"[JOIN] Node {self.node_id} attempting to join via bootstrap {self.bootstrap_ip}:{self.bootstrap_port}")
+            
         if not self.bootstrap_ip or not self.bootstrap_port:
             print("[JOIN] No bootstrap node provided. This node will start a new ring.")
+            self.successor = (self.ip, self.port, self.node_id)
+            self.predecessor = (self.ip, self.port, self.node_id)
             return
+
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.connect((self.bootstrap_ip, self.bootstrap_port))
@@ -126,14 +223,43 @@ class ChordNode:
                 }
                 s.send(json.dumps(request).encode())
                 response = json.loads(s.recv(4096).decode())
-                
-                # Process the response to set successor and predecessor
-                self.predecessor = response.get("predecessor")
-                self.successor = response.get("successor")
-                print(f"[JOIN] Node {self.node_id} joined. Predecessor: {self.predecessor}, Successor: {self.successor}")
+
+                if response.get("status") == "success":
+                    self.predecessor = response.get("predecessor")
+                    self.successor = response.get("successor")
+                    
+                    if not self.successor:
+                        self.successor = (self.ip, self.port, self.node_id)  # Ensure valid successor
+
+                    print(f"[JOIN] Initial info → Predecessor: {self.predecessor}, Successor: {self.successor}")
+
+                    
+                    # Validate successor using find_successor
+                    correct_successor = self.find_successor(self.node_id)
+                    if correct_successor and correct_successor != self.successor:
+                        self.successor = correct_successor
+                        print(f"[JOIN] Updated successor after validation: {self.successor}")
+                    
+                    # Notify the successor to update its predecessor
+                    if self.successor and isinstance(self.successor, tuple) and len(self.successor) == 3:
+                        successor_ip, successor_port, successor_id = self.successor
+                        if (successor_ip, successor_port) != (self.ip, self.port):
+                            response = self.send_message((successor_ip, successor_port), {
+                                "type": "update_predecessor",
+                                "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+                            })
+
+                print(f"[JOIN] Node {self.node_id} successfully joined. Final Successor: {self.successor}")
+
         except Exception as e:
             print(f"[ERROR] Failed to join the ring: {e}")
+
     
+    def replicate_data(self):
+        """Placeholder for replication logic. Currently does nothing."""
+        if self.replication_factor > 1:
+            print(f"[REPLICATION] Future replication logic goes here. Factor: {self.replication_factor}")
+
     def lookup(self, key: str):
         hashed_key = sha1_hash(key)
         if self.predecessor and self.predecessor[2] < hashed_key <= self.node_id:
@@ -177,12 +303,21 @@ class ChordNode:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 if isinstance(address, dict):
                     address = (address["ip"], address["port"])
-                #s.settimeout(3)  # Avoid hanging indefinitely
+                
+                s.settimeout(3)
                 s.connect(address)
                 s.send(json.dumps(message).encode())
-            
-        except (socket.error, ConnectionRefusedError):
-            print(f"[WARNING] Could not contact {address}. The node may have already departed.")
+
+                response = s.recv(4096).decode()
+                return json.loads(response) if response else {}
+        except socket.timeout:
+            print(f"[ERROR] Timeout while connecting to {address}")
+        except ConnectionRefusedError:
+            print(f"[ERROR] Connection refused by {address}")
+        except socket.error as e:
+            print(f"[ERROR] Socket error while contacting {address}: {e}")
+
+        return {"status": "error", "message": "Node unreachable"}
 
         
     def run(self):
