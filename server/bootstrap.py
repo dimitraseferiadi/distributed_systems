@@ -15,7 +15,8 @@ class BootstrapNode(ChordNode):
         print(f"[BOOTSTRAP] Starting bootstrap node with ID: {self.node_id} at {self.ip}:{self.port}")
         
         # Store nodes as dictionaries with keys: ip, port, node_id
-        self.nodes = []
+        self.nodes = [{"ip": self.ip, "port": self.port, "node_id": self.node_id}]
+
         # Ensure thread safety
         self.lock = threading.Lock()  
 
@@ -38,6 +39,12 @@ class BootstrapNode(ChordNode):
 
             predecessor, successor = self.find_neighbors(new_node_info["node_id"])
 
+            # Notify the neighbors to update their pointers:
+            # - The predecessor should now point to the new node as its successor.
+            self.send_message(predecessor, {"type": "update_successor", "node": new_node_info})
+            # - The successor should now point to the new node as its predecessor.
+            self.send_message(successor, {"type": "update_predecessor", "node": new_node_info})
+        
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
 
