@@ -266,8 +266,8 @@ class ChordNode:
         if in_range(new_pred[2], self.predecessor[2], self.node_id, include_end=False):
             self.predecessor = new_pred
             print(f"[UPDATE] New predecessor updated to: {self.predecessor}")
-        else:
-            print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
+        #else:
+            #print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
 
     def update_successor(self, node_info):
         new_succ = (node_info["ip"], node_info["port"], node_info["node_id"])
@@ -286,8 +286,8 @@ class ChordNode:
         if in_range(new_succ[2], self.successor[2], self.node_id, include_end=False):
             self.successor = new_succ
             print(f"[UPDATE] New successor updated to: {self.successor}")
-        else:
-            print(f"[WARNING] Ignored invalid successor update: {node_info}")
+        #else:
+            #print(f"[WARNING] Ignored invalid successor update: {node_info}")
 
     def handle_global_query(self, request: dict) -> dict:
         """
@@ -319,8 +319,6 @@ class ChordNode:
             "data": collected_data,
             "initial": False
         }
-        print(f"forwarded_request: {forwarded_request}")
-        print(f"self.successor[0]: {self.successor[0]} and self.successor[1]: {self.successor[1]}")
         # Send request to successor
         response = self.send_message((self.successor[0], self.successor[1]), forwarded_request)
         
@@ -391,16 +389,34 @@ class ChordNode:
         })
 
     def delete(self, key: str) -> dict:
-        """Delete a key-value pair."""
-        hashed_key = sha1_hash(key)
-        if hashed_key in self.data_store:
-            del self.data_store[hashed_key]
-            print(f"[DELETE] Key: {key} (hash: {hashed_key}) deleted.")
-            return {"status": "success", "node_id": self.node_id}
-        else:
-            print(f"[DELETE] Key: {key} (hash: {hashed_key}) not found for deletion.")
-            return {"status": "error", "message": "Key not found"}
+        """
+        Deletes a key-value pair from the distributed hash table.
+        """
+        key_id = sha1_hash(key)  # Hash the key to find its responsible node
 
+        # Check if this node is responsible for the key
+        if self.is_responsible_for_key(key_id):
+            if key_id in self.data_store:
+                del self.data_store[key_id]
+                print(f"[DELETE] Key '{key}' deleted from node {self.node_id}")
+                return {"status": "success", "message": f"Key '{key}' deleted"}
+            else:
+                print(f"[DELETE] Key '{key}' not found at node {self.node_id}")
+                return {"status": "error", "message": "Key not found"}
+
+        # Otherwise, forward the request to the responsible node
+        successor = self.find_successor(key_id)
+        if successor == (self.ip, self.port, self.node_id):
+            print(f"[ERROR] delete: Responsible node thinks it's itself but key not found")
+            return {"status": "error", "message": "Key not found in ring"}
+
+        response = self.send_message((successor[0], successor[1]), {
+            "type": "delete",
+            "key": key
+        })
+        return response
+
+    
     def join_ring(self):
         print(f"[JOIN] Node {self.node_id} attempting to join via bootstrap {self.bootstrap_ip}:{self.bootstrap_port}")
             
