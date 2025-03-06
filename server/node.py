@@ -137,7 +137,7 @@ class ChordNode:
         elif req_type == "join":
             return self.handle_join(request["node_info"])
         elif req_type == "depart":
-                return self.handle_depart(request["node_info"])
+            return self.depart(request["node_id"])
         elif req_type == "find_successor":
             hops = request.get("hops", 0)
             successor = self.find_successor(request["node_id"], hops)
@@ -156,6 +156,34 @@ class ChordNode:
             return {"status": "success"}
         elif req_type == "get_predecessor":
             return {"status": "success", "predecessor": self.predecessor}
+        elif req_type == "shutdown":
+            self.running = False
+            return {"status": "success", "message": "Node shutting down."}
+        elif req_type == "get_neighbors":
+            return {
+                "status": "success",
+                "predecessor": tuple(self.predecessor) if self.predecessor else None,
+                "successor": tuple(self.successor) if self.successor else None,
+                "keys": self.data_store
+            }
+        elif req_type == "find_node":
+            return self.find_node(request["node_id"])
+        elif req_type == "confirm_node":
+            # This request is sent when a node is found via find_successor to verify if it's the correct one.
+            if self.node_id == request["node_id"]:
+                return {"status": "success", "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}}
+            else:
+                return {"status": "error", "message": f"Node {request['node_id']} not found here."}
+        elif req_type == "transfer_keys":
+            keys_to_transfer = request.get("keys", {})
+            if isinstance(keys_to_transfer, dict):  # Ensure it's a dictionary before merging
+                self.data_store.update(keys_to_transfer)
+                print(f"[TRANSFER] Received {len(keys_to_transfer)} keys.")
+                return {"status": "success"}
+            else:
+                print("[ERROR] transfer_keys received invalid data format")
+                return {"status": "error", "message": "Invalid data format"}
+        
         return {"status": "error", "message": "Unknown request type"}
     
     def insert(self, key: str, value: str) -> dict:
@@ -466,43 +494,154 @@ class ChordNode:
         if self.replication_factor > 1:
             print(f"[REPLICATION] Future replication logic goes here. Factor: {self.replication_factor}")
 
-    def lookup(self, key: str):
-        hashed_key = sha1_hash(key)
-        if self.predecessor and self.predecessor[2] < hashed_key <= self.node_id:
-            return {"status": "success", "node": self.node_id, "message": "Responsible node found."}
-        return self.forward_request(self.successor, {"type": "lookup", "key": key})
-    
-    def forward_request(self, node, request):
-        return self.send_message((node[0], node[1]), request)
-    
-    def depart(self):
+    def depart(self, node_id: int) -> dict:
         """
-        Gracefully depart from the ring.
-        Notify other nodes (e.g., successor and predecessor) that this node is leaving.
+        Removes a specific node from the Chord ring.
+        - Transfers its keys to its successor.
+        - Updates predecessor and successor pointers.
+        - Notifies the departing node to shut down.
         """
-        print(f"[DEPART] Node {self.node_id} is departing from the ring.")
+        print(f"[DEPART] Request to remove node {node_id} from the ring.")
+
+        # If this node is the one leaving, handle self-depart
+        if node_id == self.node_id:
+            return self.self_depart()
+
+        # Find the departing node's successor and predecessor
+        response = self.send_message((self.successor[0], self.successor[1]), {
+            "type": "find_node",
+            "node_id": node_id
+        })
+        departing_node = response.get("node")
         
-        # Notify predecessor and successor to update their states
-        if self.predecessor and self.successor:
-            self.send_message(self.predecessor, {"type": "update_successor", "node": normalize_node(self.successor)})
-            self.send_message(self.successor, {"type": "update_predecessor", "node": normalize_node(self.predecessor)})
-        # Notify the bootstrap node about the departure
-        if self.bootstrap_ip and self.bootstrap_port:
-            self.send_message((self.bootstrap_ip, self.bootstrap_port), {"type": "node_departed", "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}})
+        if not departing_node:
+            print(f"[ERROR] Node {node_id} not found in the ring.")
+            return {"status": "error", "message": "Node not found in ring"}
 
-        # Now that the departure is communicated, clean up local state (predecessor, successor, etc.)
-        self.cleanup_local_state()
+        departing_ip, departing_port, departing_id = departing_node["ip"], departing_node["port"], departing_node["node_id"]
 
-        sys.exit(0)
+        # Ask the departing node for its successor and predecessor
+        response = self.send_message((departing_ip, departing_port), {"type": "get_neighbors"})
+        if response.get("status") != "success":
+            return {"status": "error", "message": "Failed to get neighbors of departing node"}
 
-    def cleanup_local_state(self):
-        """Clean up local state after departure."""
-        # Update the predecessor and successor references, this node is now leaving
-        print(f"[CLEANUP] Node {self.node_id} cleaning up state.")
-        self.predecessor = None
-        self.successor = None
+        predecessor = response.get("predecessor")
+        successor = response.get("successor")
+
+        print(f"[DEPART] Node {departing_id} -> Predecessor: {predecessor}, Successor: {successor}")
+
+        # Ensure correct tuple indexing
+        if isinstance(predecessor, list):
+            predecessor = tuple(predecessor)
+        if isinstance(successor, list):
+            successor = tuple(successor)
+
+        # Transfer keys to successor
+        if successor and successor != (departing_ip, departing_port, departing_id):
+            print(f"[DEPART] Transferring keys from {departing_id} to {successor[2]}")
+            transfer_response = self.send_message((successor[0], successor[1]), {
+                "type": "transfer_keys",
+                "keys": response.get("keys", {})
+            })
+            if transfer_response.get("status") == "success":
+                print(f"[DEPART] Key transfer to {successor[2]} successful.")
+            else:
+                print(f"[ERROR] Key transfer failed: {transfer_response.get('message', 'Unknown error')}")
+
+        # Notify predecessor to update its successor
+        if predecessor:
+            print(f"[DEPART] Updating predecessor {predecessor[2]} to point to {successor[2]}")
+            self.send_message((predecessor[0], predecessor[1]), {
+                "type": "update_successor",
+                "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+            })
+
+        # Notify successor to update its predecessor
+        if successor and successor != (departing_ip, departing_port, departing_id):
+            print(f"[DEPART] Updating successor {successor[2]} to point to {predecessor[2]}")
+            self.send_message((successor[0], successor[1]), {
+                "type": "update_predecessor",
+                "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+            })
+
+        # Finally, tell the node to shut itself down
+        print(f"[DEPART] Notifying {departing_id} to shut down.")
+        self.send_message((departing_ip, departing_port), {
+            "type": "shutdown"
+        })
+
+        return {"status": "success", "message": f"Node {node_id} has left the ring."}
+
+    def self_depart(self) -> dict:
+        """
+        Handles the departure of the current node itself.
+        """
+        print(f"[DEPART] Node {self.node_id} is leaving the ring.")
+
+        # If this is the only node in the ring, just shut down.
+        if self.successor == (self.ip, self.port, self.node_id) and self.predecessor is None:
+            print(f"[DEPART] Node {self.node_id} was the only node in the ring. Shutting down.")
+            self.running = False
+            return {"status": "success", "message": f"Node {self.node_id} has left."}
+
+        # Transfer keys to successor
+        if self.successor and self.successor != (self.ip, self.port, self.node_id):
+            print(f"[DEPART] Transferring keys to successor {self.successor[2]}")
+            self.send_message((self.successor[0], self.successor[1]), {
+                "type": "transfer_keys",
+                "keys": self.data_store
+            })
+
+        # Notify predecessor
+        if self.predecessor:
+            print(f"[DEPART] Notifying predecessor {self.predecessor[2]} to update successor.")
+            self.send_message((self.predecessor[0], self.predecessor[1]), {
+                "type": "update_successor",
+                "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+            })
+
+        # Notify successor
+        if self.successor and self.successor != (self.ip, self.port, self.node_id):
+            print(f"[DEPART] Notifying successor {self.successor[2]} to update predecessor.")
+            self.send_message((self.successor[0], self.successor[1]), {
+                "type": "update_predecessor",
+                "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+            })
+
+        # Stop the node
+        self.running = False
+        return {"status": "success", "message": f"Node {self.node_id} has departed."}
     
-     
+    def find_node(self, node_id: int) -> dict:
+        """
+        Finds a node in the ring given its node_id.
+        Returns the node's (ip, port, node_id) if found.
+        """
+        node_id = int(node_id)
+        print(f"[FIND_NODE] Searching for node {node_id}")
+
+        # If this node matches, return itself
+        if self.node_id == node_id:
+            return {"status": "success", "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}}
+
+        # Find the responsible node
+        successor = self.find_successor(node_id)
+        
+        # If the responsible node is this node, return an error (node not found)
+        if successor == (self.ip, self.port, self.node_id):
+            return {"status": "error", "message": f"Node {node_id} not found in ring"}
+
+        # Query the responsible node for confirmation
+        response = self.send_message((successor[0], successor[1]), {
+            "type": "confirm_node",
+            "node_id": node_id
+        })
+
+        if response.get("status") == "success":
+            return response
+        else:
+            return {"status": "error", "message": f"Node {node_id} not found"}
+
     def send_message(self, address, message):
         """Send a message to a given address but handle connection failures gracefully."""
         if address == (self.ip, self.port):

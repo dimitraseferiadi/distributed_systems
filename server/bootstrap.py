@@ -68,64 +68,6 @@ class BootstrapNode(ChordNode):
         
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
-
-
-    def handle_depart(self, departing_node_info: dict) -> dict:
-        departing_node_id = departing_node_info.get("node_id")
-        if departing_node_id is None:
-            return {"status": "error", "message": "Invalid departure request. No node_id provided."}
-
-        print(f"[BOOTSTRAP] Node {departing_node_id} is departing.")
-
-        with self.lock:
-            # Look up the node to remove.
-            node_to_remove = self.get_node_by_id(departing_node_id)
-            if node_to_remove is None:
-                return {"status": "error", "message": f"Node {departing_node_id} not found in the ring."}
-            
-            # Remove the node from the list.
-            self.nodes.remove(node_to_remove)
-            print(f"[DEBUG] Removed node {departing_node_id}. New node list: {self.nodes}")
-
-            # If there are still nodes left, update neighbors based on the new ring.
-            if self.nodes:
-                # In the new sorted list, determine the neighbors of the departing node's previous position.
-                # To do this, we can determine where the departing node would have been.
-                sorted_ids = [node["node_id"] for node in self.nodes]
-                # Find the index where the departing node would fit.
-                insert_index = 0
-                for i, nid in enumerate(sorted_ids):
-                    if nid > departing_node_id:
-                        insert_index = i
-                        break
-                else:
-                    insert_index = len(sorted_ids)
-
-                # The predecessor is the node just before this index (wrap-around if needed).
-                pred_index = (insert_index - 1) % len(self.nodes)
-                # The successor is the node at the insertion index (wrap-around if needed).
-                succ_index = insert_index % len(self.nodes)
-                predecessor = self.nodes[pred_index]
-                successor = self.nodes[succ_index]
-
-                print(f"[DEBUG] New neighbors for updates: predecessor: {predecessor}, successor: {successor}")
-
-                # Notify the neighbors to update their pointers.
-                self.send_message((predecessor["ip"], predecessor["port"]), {
-                    "type": "update_successor",
-                    "node_info": successor
-                })
-                self.send_message((successor["ip"], successor["port"]), {
-                    "type": "update_predecessor",
-                    "node_info": predecessor
-                })
-            else:
-                print("[DEBUG] No nodes left in the ring after departure.")
-
-        print(f"[BOOTSTRAP] Updated node list after departure: {self.nodes}")
-        return {"status": "success", "message": f"Node {departing_node_id} has left the ring."}
-
-
     
     def find_neighbors(self, node_id: int):
         """
@@ -171,35 +113,10 @@ class BootstrapNode(ChordNode):
 
         if req_type == "join":
             return self.handle_join(node_info)
-            
-        elif req_type in ("depart", "node_departed"):
-            node_info = request.get("node_info") or request.get("node")
-
-            # Allow specifying only a node_id for departure
-            if not node_info:
-                node_id = request.get("node_id")
-                if node_id is None:
-                    return {"status": "error", "message": "No node information provided for departure."}
-                node_info = self.get_node_by_id(node_id)
-                if not node_info:
-                    return {"status": "error", "message": f"Node {node_id} not found in the ring."}
-
-            return self.handle_depart(node_info)
         elif req_type == "overlay":
             return self.get_overlay()
         else:
             return super().process_request(request)
-
-    def get_node_by_id(self, node_id: int):
-        """Find a node in the ring by its ID."""
-        print(f"[DEBUG] Searching for node_id: {node_id}")
-        print(f"[DEBUG] Current nodes: {self.nodes}")
-
-        for node in self.nodes:
-            print(f"[DEBUG] Checking node: {node['node_id']}")
-            if node["node_id"] == node_id:
-                return node
-        return None
 
 
 if __name__ == "__main__":
