@@ -115,7 +115,6 @@ class ChordNode:
         The request should have a "type" field (e.g., insert, query, delete, join, depart)
         and any additional data needed for the operation.
         """
-        print(f"[DEBUG] process_request at node {self.node_id}: Received request: {request}")
    
         req_type = request.get("type")
 
@@ -200,7 +199,6 @@ class ChordNode:
 
         # If we've hit the hop limit, assume self.
         if hops >= MAX_HOPS:
-            print("[DEBUG] Max hops reached in find_successor; returning self.")
             return self_id
 
         # If the ring is a one-node ring, return self.
@@ -303,14 +301,11 @@ class ChordNode:
         collected_data = request.get("data", {})
         initial = request.get("initial", False)
 
-        print(f"[DEBUG] handle_global_query at node {self.node_id}: origin={origin}, collected_data={collected_data}, initial={initial}")
-
         # Merge this node's local data with collected data
         collected_data.update(self.data_store)
 
         # If this query has looped back to the origin, return the collected data
         if not initial and origin == (self.ip, self.port, self.node_id):
-            print(f"[DEBUG] handle_global_query: Query looped back to origin, returning collected data.")
             return {"status": "success", "data": collected_data}
         
         # If only one node in the ring, return data directly
@@ -324,12 +319,12 @@ class ChordNode:
             "data": collected_data,
             "initial": False
         }
-
+        print(f"forwarded_request: {forwarded_request}")
+        print(f"self.successor[0]: {self.successor[0]} and self.successor[1]: {self.successor[1]}")
         # Send request to successor
         response = self.send_message((self.successor[0], self.successor[1]), forwarded_request)
         
         if not response or "status" not in response:
-            print(f"[DEBUG] handle_global_query at node {self.node_id}: No valid response, returning collected data.")
             return {"status": "success", "data": collected_data}
 
         # Merge successor response into collected data
@@ -344,10 +339,8 @@ class ChordNode:
         if self.is_responsible_for_key(key_id):
             if key_id in self.data_store:
                 value = self.data_store[key_id]
-                print(f"[DEBUG] normal_query: Found key '{key}' (hash: {key_id}) at node {self.node_id}")
                 return {"status": "success", "value": value}
             else:
-                print(f"[DEBUG] normal_query: Key '{key}' not found at node {self.node_id}.")
                 return {"status": "error", "message": "Key not found"}
         else:
             successor = self.find_successor(key_id)
@@ -363,7 +356,6 @@ class ChordNode:
     def query(self, key: str) -> dict:
         """Entry point for query requests initiated by this node."""
         if key == "*":
-            print(f"[DEBUG] query: Initiating global query (*) at node {self.node_id}")
             if self.successor == (self.ip, self.port, self.node_id):
                 return {"status": "success", "data": self.data_store}
             collected = self.data_store.copy()
@@ -509,7 +501,6 @@ class ChordNode:
                 s.send(json.dumps(message).encode())
 
                 response = s.recv(4096).decode()
-                print(f"[DEBUG] Raw response from {address}: {response}")
                 return json.loads(response) if response else {}
         except socket.timeout:
             print(f"[ERROR] Timeout while connecting to {address}")
