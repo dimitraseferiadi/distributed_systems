@@ -118,7 +118,10 @@ class ChordNode:
         print(f"[DEBUG] process_request at node {self.node_id}: Received request: {request}")
    
         req_type = request.get("type")
-        if (req_type == "query" and request.get("key") == "*") or req_type == "query_all":
+
+        if req_type == "insert":
+            return self.insert(request["key"], request["value"])
+        elif (req_type == "query" and request.get("key") == "*"):
             new_request = {
                 "type": "query_all",
                 "origin": (self.ip, self.port, self.node_id),  # this node is the origin
@@ -126,8 +129,6 @@ class ChordNode:
                 "initial": True 
             }
             return self.handle_global_query(new_request)
-        if req_type == "insert":
-            return self.insert(request["key"], request["value"])
         elif req_type == "query_all":
             return self.handle_global_query(request)
         elif req_type == "query":
@@ -270,14 +271,25 @@ class ChordNode:
         else:
             print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
 
-    def update_successor(self, node):
-        new_succ = (node["ip"], node["port"], node["node_id"])
-        # Update if there's no successor or new_succ is a better candidate.
-        if self.successor is None or in_range(new_succ[2], self.node_id, self.successor[2] if self.successor else self.node_id, include_end=False):
+    def update_successor(self, node_info):
+        new_succ = (node_info["ip"], node_info["port"], node_info["node_id"])
+
+        # Normalize existing successor if necessary.
+        if self.successor is not None:
+            self.successor = normalize_node(self.successor)
+        
+        # For simplicity, if there's no successor, accept the new one.
+        if self.successor is None:
             self.successor = new_succ
-            print(f"[UPDATE] New successor set to: {self.successor}")
+            print(f"[UPDATE] Successor set to: {self.successor}")
+            return
+        
+        # Use your logic (e.g., in_range) to decide if the update is valid.
+        if in_range(new_succ[2], self.successor[2], self.node_id, include_end=False):
+            self.successor = new_succ
+            print(f"[UPDATE] New successor updated to: {self.successor}")
         else:
-            print(f"[WARNING] Ignored invalid successor update: {node}")
+            print(f"[WARNING] Ignored invalid successor update: {node_info}")
 
     def handle_global_query(self, request: dict) -> dict:
         """
@@ -287,53 +299,44 @@ class ChordNode:
         - 'data': a dict containing already aggregated key–value pairs
         - 'initial': a flag indicating that this is the very first hop.
         """
-        # Normalize origin (JSON converts tuples into lists)
-        origin = request.get("origin")
-        if origin is not None:
-            origin = tuple(origin)
-        else:
-            print("[DEBUG] handle_global_query: No origin provided, using self")
-            origin = (self.ip, self.port, self.node_id)
-        
-        collected_data = request.get("data")
-        if not isinstance(collected_data, dict):
-            print(f"[DEBUG] handle_global_query: Received invalid data ({collected_data}); defaulting to empty dict")
-            collected_data = {}
-        
+        origin = tuple(request.get("origin", (self.ip, self.port, self.node_id)))
+        collected_data = request.get("data", {})
         initial = request.get("initial", False)
-        
+
         print(f"[DEBUG] handle_global_query at node {self.node_id}: origin={origin}, collected_data={collected_data}, initial={initial}")
-        
-        # If this is not the initial hop and we've looped back to the origin, return the aggregated data.
-        if (not initial) and (origin == (self.ip, self.port, self.node_id)):
-            print(f"[DEBUG] handle_global_query: Loop complete at origin node {self.node_id}")
+
+        # Merge this node's local data with collected data
+        collected_data.update(self.data_store)
+
+        # If this query has looped back to the origin, return the collected data
+        if not initial and origin == (self.ip, self.port, self.node_id):
+            print(f"[DEBUG] handle_global_query: Query looped back to origin, returning collected data.")
             return {"status": "success", "data": collected_data}
         
-        # Merge this node's local data.
-        new_data = collected_data.copy()
-        new_data.update(self.data_store)
-        
-        # Determine the next node to forward to.
+        # If only one node in the ring, return data directly
         if self.successor == (self.ip, self.port, self.node_id):
-            # Only node in the ring.
-            return {"status": "success", "data": new_data}
-        
-        # Prepare the forwarded message.
+            return {"status": "success", "data": collected_data}
+
+        # Prepare to forward the request
         forwarded_request = {
             "type": "query_all",
             "origin": origin,
-            "data": new_data,
-            "initial": False  # clear the initial flag after the first hop
+            "data": collected_data,
+            "initial": False
         }
-        
+
+        # Send request to successor
         response = self.send_message((self.successor[0], self.successor[1]), forwarded_request)
-        print(f"[DEBUG] handle_global_query at node {self.node_id}: Received response: {response}")
         
-        if not response or not isinstance(response, dict) or "status" not in response:
-            print(f"[DEBUG] handle_global_query at node {self.node_id}: Response invalid, returning new_data")
-            return {"status": "success", "data": new_data}
-        
-        return response
+        if not response or "status" not in response:
+            print(f"[DEBUG] handle_global_query at node {self.node_id}: No valid response, returning collected data.")
+            return {"status": "success", "data": collected_data}
+
+        # Merge successor response into collected data
+        successor_data = response.get("data", {})
+        collected_data.update(successor_data)
+
+        return {"status": "success", "data": collected_data}
 
     def normal_query(self, key: str) -> dict:
         """Handles a normal single-key query."""
