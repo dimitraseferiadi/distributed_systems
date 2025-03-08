@@ -1,109 +1,73 @@
+from node import ChordNode
 import socket
 import threading
 import json
 import hashlib
 
+
 # Utility function for hashing keys using SHA1.
 def sha1_hash(key: str) -> int:
     return int(hashlib.sha1(key.encode()).hexdigest(), 16)
 
-class BootstrapNode:
+class BootstrapNode(ChordNode):
     def __init__(self, ip: str, port: int):
-        self.ip = ip
-        self.port = port
-        self.address = (self.ip, self.port)
-        self.node_id = sha1_hash(f"{ip}:{port}")
+        super().__init__(ip, port)
         print(f"[BOOTSTRAP] Starting bootstrap node with ID: {self.node_id} at {self.ip}:{self.port}")
         
         # Store nodes as dictionaries with keys: ip, port, node_id
-        self.nodes = []
+        self.nodes = [{"ip": self.ip, "port": self.port, "node_id": self.node_id}]
+
         # Ensure thread safety
         self.lock = threading.Lock()  
 
         # Start server thread to listen for join requests.
         self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
-
-    def start_server(self):
-        """Listen for incoming join (and possibly other) requests."""
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind(self.address)
-        server_socket.listen(5)
-        print(f"[BOOTSTRAP] Listening on {self.ip}:{self.port} for join requests...")
-
-        while True:
-            client_socket, _ = server_socket.accept()
-            threading.Thread(target=self.handle_request, args=(client_socket,)).start()
-
-    def handle_request(self, client_socket: socket.socket):
-        try:
-            message = client_socket.recv(4096).decode()
-            if not message:
-                client_socket.close()
-                return
-            request = json.loads(message)
-            response = self.process_request(request)
-            client_socket.send(json.dumps(response).encode())
-        except Exception as e:
-            print(f"[BOOTSTRAP ERROR] {e}")
-        finally:
-            client_socket.close()
-
-    def process_request(self, request: dict) -> dict:
-        req_type = request.get("type")
-        node_info = request.get("node_info")
-
-        if req_type == "join":
-            return self.handle_join(node_info)
-        elif req_type == "depart":
-            return self.handle_depart(node_info)
-        elif req_type == "overlay":
-            return self.get_overlay()
-        else:
-            return {"status": "error", "message": "Unsupported request type"}
-
+        
     def handle_join(self, new_node_info: dict) -> dict:
         """
-        Handles node joining, assigns predecessor and successor.
+        Handles a node joining and assigns its predecessor and successor.
+        Also updates the bootstrap node's own successor pointer so that it
+        is not left pointing to itself when other nodes are present.
         """
         print(f"[BOOTSTRAP] Received join request from node: {new_node_info}")
+
+        bootstrap_info = {"ip": self.ip, "port": self.port, "node_id": self.node_id}
         
         with self.lock:
+            # Ensure the bootstrap node is in the nodes list.
+            if not any(node["node_id"] == self.node_id for node in self.nodes):
+                self.nodes.append(bootstrap_info)
+            
+            # Check for duplicates.
             if any(node["node_id"] == new_node_info["node_id"] for node in self.nodes):
                 return {"status": "error", "message": "Node already exists"}
             
+            # Add the new node.
             self.nodes.append(new_node_info)
-            self.nodes.sort(key=lambda node: node["node_id"])  # Ensure order
-
+            self.nodes.sort(key=lambda node: node["node_id"])
+            
+            # Determine the new node's neighbors.
             predecessor, successor = self.find_neighbors(new_node_info["node_id"])
-
+            
+            # **Update the bootstrap node's own successor pointer.**
+            # Find the bootstrap node in the sorted list.
+            bootstrap_index = next(i for i, node in enumerate(self.nodes) if node["node_id"] == self.node_id)
+            # The new successor for bootstrap is the next node in the sorted order.
+            new_bootstrap_successor = self.nodes[(bootstrap_index + 1) % len(self.nodes)]
+            if new_bootstrap_successor["node_id"] != self.node_id:
+                self.successor = new_bootstrap_successor
+                print(f"[BOOTSTRAP] Updated bootstrap successor to: {self.successor}")
+            else:
+                # Only bootstrap exists.
+                self.successor = bootstrap_info
+            
+            # Notify the new node's neighbors so that they update their pointers.
+            self.send_message(predecessor, {"type": "update_successor", "node_info": new_node_info})
+            self.send_message(successor, {"type": "update_predecessor", "node_info": new_node_info})
+        
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
-
-
-    def handle_depart(self, departing_node_info: dict) -> dict:
-        """
-        Handles node departure and updates the ring.
-        """
-        departing_node_id = departing_node_info["node_id"]
-        print(f"[BOOTSTRAP] Node {departing_node_id} is departing.")
-
-        with self.lock:
-            # Find the departing node and remove it
-            self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_id]
-
-            # Update predecessor and successor of affected nodes
-            if self.nodes:
-                predecessor, successor = self.find_neighbors(departing_node_id)
-
-                if predecessor:
-                    self.send_message(predecessor, {"type": "update_successor", "node": successor})
-                if successor:
-                    self.send_message(successor, {"type": "update_predecessor", "node": predecessor})
-
-        print(f"[BOOTSTRAP] Updated node list after departure: {self.nodes}")
-        return {"status": "success"}
-
     
     def find_neighbors(self, node_id: int):
         """
@@ -142,6 +106,17 @@ class BootstrapNode:
         except (socket.error, ConnectionRefusedError):
             return False
 
+    def process_request(self, request: dict) -> dict:
+        """Override request processing to include bootstrap-specific requests."""
+        req_type = request.get("type")
+        node_info = request.get("node_info")
+
+        if req_type == "join":
+            return self.handle_join(node_info)
+        elif req_type == "overlay":
+            return self.get_overlay()
+        else:
+            return super().process_request(request)
 
 
 if __name__ == "__main__":
