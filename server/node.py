@@ -157,6 +157,7 @@ class ChordNode:
         elif req_type == "get_predecessor":
             return {"status": "success", "predecessor": self.predecessor}
         elif req_type == "shutdown":
+            print(f"[DEPART] Node {self.node_id} is shutting down.")
             self.running = False
             return {"status": "success", "message": "Node shutting down."}
         elif req_type == "get_neighbors":
@@ -174,6 +175,9 @@ class ChordNode:
                 return {"status": "success", "node": {"ip": self.ip, "port": self.port, "node_id": self.node_id}}
             else:
                 return {"status": "error", "message": f"Node {request['node_id']} not found here."}
+        elif req_type == "get_keys":
+            print(f"[TRANSFER] Node {self.node_id} providing {len(self.data_store)} keys for transfer.")
+            return {"status": "success", "keys": self.data_store}
         elif req_type == "transfer_keys":
             keys_to_transfer = request.get("keys", {})
             if isinstance(keys_to_transfer, dict):  # Ensure it's a dictionary before merging
@@ -503,10 +507,15 @@ class ChordNode:
         """
         print(f"[DEPART] Request to remove node {node_id} from the ring.")
 
+        self.send_message((self.bootstrap_ip, self.bootstrap_port), {
+            "type": "depart",
+            "node_id": self.node_id
+        })
+
         # If this node is the one leaving, handle self-depart
         if node_id == self.node_id:
             return self.self_depart()
-
+        
         # Find the departing node's successor and predecessor
         response = self.send_message((self.successor[0], self.successor[1]), {
             "type": "find_node",

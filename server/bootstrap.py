@@ -69,6 +69,69 @@ class BootstrapNode(ChordNode):
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
     
+    def handle_depart(self, departing_node_id: int) -> dict:
+        """
+        Handles a node departure by:
+        - Removing the departing node from the node list.
+        - Requesting the departing node to transfer its keys to its successor.
+        - Updating the departed node's neighbors to point to each other.
+        - Sending a shutdown request to the departing node.
+        """
+        print(f"[BOOTSTRAP] Handling departure of node {departing_node_id}")
+
+        with self.lock:
+            # Ensure the node exists before attempting removal
+            departing_node_id = int(departing_node_id)
+            departing_node = next((node for node in self.nodes if node["node_id"] == departing_node_id), None)
+            if not departing_node:
+                print(f"[WARNING] Node {departing_node_id} not found in Bootstrap's record. Skipping.")
+                return {"status": "error", "message": "Node not found in Bootstrap list"}
+
+            # Identify predecessor and successor
+            predecessor, successor = self.find_neighbors(departing_node_id)
+
+            # Request keys from departing node
+            key_response = self.send_message((departing_node["ip"], departing_node["port"]), {
+                "type": "get_keys"
+            })
+
+            keys_to_transfer = key_response.get("keys", {})
+            print(f"[TRANSFER] Collected {len(keys_to_transfer)} keys from departing node {departing_node_id}.")
+
+            # Request departing node to transfer its keys to successor
+            if keys_to_transfer and successor:
+                print(f"[TRANSFER] Sending {len(keys_to_transfer)} keys to successor {successor['node_id']}")
+                self.send_message((successor["ip"], successor["port"]), {
+                    "type": "transfer_keys",
+                    "keys": keys_to_transfer
+                })
+
+            # Notify predecessor and successor to update their pointers
+            if predecessor:
+                self.send_message(predecessor, {"type": "update_successor", "node_info": successor})
+            if successor:
+                self.send_message(successor, {"type": "update_predecessor", "node_info": predecessor})
+
+            # Send shutdown request to the departing node
+            self.send_message((departing_node["ip"], departing_node["port"]), {
+                "type": "shutdown"
+            })
+
+            # Remove the departing node from Bootstrap's list
+            self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_id]
+
+            print(f"[BOOTSTRAP] Node {departing_node_id} removed. Updated nodes: {self.nodes}")
+
+            # Update Bootstrap’s successor if the departed node was its direct successor
+            if self.successor[2] == departing_node_id:
+                new_bootstrap_successor = self.nodes[0] if self.nodes else {"ip": self.ip, "port": self.port, "node_id": self.node_id}
+                self.successor = (new_bootstrap_successor["ip"], 
+                    new_bootstrap_successor["port"], 
+                    new_bootstrap_successor["node_id"])
+                print(f"[BOOTSTRAP] Updated successor to: {self.successor}")
+
+        return {"status": "success", "message": f"Node {departing_node_id} successfully removed from the network"}
+
     def find_neighbors(self, node_id: int):
         """
         Returns the predecessor and the successor of the node.
@@ -109,10 +172,13 @@ class BootstrapNode(ChordNode):
     def process_request(self, request: dict) -> dict:
         """Override request processing to include bootstrap-specific requests."""
         req_type = request.get("type")
-        node_info = request.get("node_info")
 
         if req_type == "join":
+            node_info = request.get("node_info")
             return self.handle_join(node_info)
+        elif req_type == "depart":
+            node_id = request.get("node_id")
+            return self.handle_depart(node_id)
         elif req_type == "overlay":
             return self.get_overlay()
         else:
