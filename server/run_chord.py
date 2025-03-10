@@ -1,41 +1,40 @@
 import subprocess
 import time
-import sys
-import os
 
-# Adjust paths if needed
-BOOTSTRAP_SCRIPT = "bootstrap.py"
-NODE_SCRIPT = "node.py"
+BOOTSTRAP_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/bootstrap.py"
+NODE_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/node.py"
+CLIENT_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/client.py"
 
-# Bootstrap node settings
+
 BOOTSTRAP_IP = "127.0.0.1"
-BOOTSTRAP_PORT = 5000  
+BOOTSTRAP_PORT = 5000 
 
-# Node settings
 NODE_IP = "127.0.0.1"
 NUM_NODES = 3
-BASE_PORT = 6000  # Ports for nodes will be 6000, 6001, 6002...
+BASE_PORT = 6000  
 
-def run_command(command):
-    """Runs a command in a new terminal window."""
-    if sys.platform.startswith("win"):
-        subprocess.Popen(["start", "cmd", "/k"] + command, shell=True)
-    elif sys.platform.startswith("linux"):
-        subprocess.Popen(["x-terminal-emulator", "-e"] + command)
-    else:
-        print("Unsupported OS. Run manually:", " ".join(command))
+# Start Windows Terminal command
+wt_cmd = 'wt new-tab'
 
-# Start Bootstrap Node
+# Start Bootstrap Node in first pane
 print("[START] Launching Bootstrap Node...")
-run_command(["python3", BOOTSTRAP_SCRIPT, BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
+wt_cmd += f' cmd /k "python {BOOTSTRAP_SCRIPT} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
 
-# Wait for Bootstrap Node to be ready
+time.sleep(2)  # Wait for Bootstrap Node to start
+
+# Create an equal-sized grid for Nodes and Clients
+wt_cmd += f' ; split-pane -p 50 -H cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
+time.sleep(2)
+wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+1} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
+time.sleep(2)
+wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+2} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
 time.sleep(2)
 
-# Start Chord Nodes
-for i in range(NUM_NODES):
-    node_port = BASE_PORT + i
-    print(f"[START] Launching Node {i+1} on port {node_port}...")
-    run_command(["python3", NODE_SCRIPT, NODE_IP, str(node_port), BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
+# Open Clients in a **new tab** with the first client immediately
+print(f"[START] Launching Client")
+client_cmd = f'cmd /k "python {CLIENT_SCRIPT}"'
+wt_cmd += f' ; new-tab {client_cmd}'
 
-print("[INFO] All nodes started. Check terminal windows for logs.")
+
+# Run all commands in a single Windows Terminal window
+subprocess.run(wt_cmd, shell=True)
