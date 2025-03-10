@@ -27,7 +27,7 @@ def run_command(command):
 
 # Start Bootstrap Node
 print("[START] Launching Bootstrap Node...")
-run_command(["python", BOOTSTRAP_SCRIPT, BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
+run_command(["python3", BOOTSTRAP_SCRIPT, BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
 
 # Wait for Bootstrap Node to be ready
 time.sleep(2)
@@ -36,6 +36,6 @@ time.sleep(2)
 for i in range(NUM_NODES):
     node_port = BASE_PORT + i
     print(f"[START] Launching Node {i+1} on port {node_port}...")
-    run_command(["python", NODE_SCRIPT, NODE_IP, str(node_port), BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
+    run_command(["python3", NODE_SCRIPT, NODE_IP, str(node_port), BOOTSTRAP_IP, str(BOOTSTRAP_PORT)])
 
 print("[INFO] All nodes started. Check terminal windows for logs.")
