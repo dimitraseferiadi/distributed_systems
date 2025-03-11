@@ -89,7 +89,16 @@ class BootstrapNode(ChordNode):
 
             # Identify predecessor and successor
             predecessor, successor = self.find_neighbors(departing_node_id)
+            print(f"predecessor: {predecessor}, successor: {successor}")
 
+            # Ensure valid sucessor
+            if successor and successor["node_id"] == departing_node_id:
+                successor = None
+
+            # Ensure valid predecessor
+            if predecessor and predecessor["node_id"] == departing_node_id:
+                predecessor = None
+                
             # Request keys from departing node
             key_response = self.send_message((departing_node["ip"], departing_node["port"]), {
                 "type": "get_keys"
@@ -110,6 +119,7 @@ class BootstrapNode(ChordNode):
             if predecessor:
                 self.send_message(predecessor, {"type": "update_successor", "node_info": successor})
             if successor:
+                self.send_message(successor, {"type": "reset_predecessor"}) 
                 self.send_message(successor, {"type": "update_predecessor", "node_info": predecessor})
 
             # Send shutdown request to the departing node
@@ -119,7 +129,6 @@ class BootstrapNode(ChordNode):
 
             # Remove the departing node from Bootstrap's list
             self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_id]
-
             print(f"[BOOTSTRAP] Node {departing_node_id} removed. Updated nodes: {self.nodes}")
 
             # Update Bootstrap’s successor if the departed node was its direct successor
