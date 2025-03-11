@@ -201,6 +201,7 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) < 4:
         print("Usage: python bootstrap.py <ip> <port> <replication_factor")
+        # python bootstrap.py 127.0.0.1 5000
         exit(1)
 
     ip = sys.argv[1]
