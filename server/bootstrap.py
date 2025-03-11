@@ -10,8 +10,8 @@ def sha1_hash(key: str) -> int:
     return int(hashlib.sha1(key.encode()).hexdigest(), 16)
 
 class BootstrapNode(ChordNode):
-    def __init__(self, ip: str, port: int):
-        super().__init__(ip, port)
+    def __init__(self, ip: str, port: int, replication_factor: int):
+        super().__init__(ip, port, replication_factor)
         print(f"[BOOTSTRAP] Starting bootstrap node with ID: {self.node_id} at {self.ip}:{self.port}")
         
         # Store nodes as dictionaries with keys: ip, port, node_id
@@ -139,6 +139,9 @@ class BootstrapNode(ChordNode):
                     new_bootstrap_successor["node_id"])
                 print(f"[BOOTSTRAP] Updated successor to: {self.successor}")
 
+            # Trigger replication repair on the successor so that keys are re-replicated properly.
+            if successor:
+                self.send_message(successor, {"type": "repair_replication"})
         return {"status": "success", "message": f"Node {departing_node_id} successfully removed from the network"}
 
     def find_neighbors(self, node_id: int):
@@ -196,13 +199,14 @@ class BootstrapNode(ChordNode):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) < 3:
-        print("Usage: python bootstrap.py <ip> <port>")
+    if len(sys.argv) < 4:
+        print("Usage: python bootstrap.py <ip> <port> <replication_factor")
         exit(1)
 
     ip = sys.argv[1]
     port = int(sys.argv[2])
-    bootstrap = BootstrapNode(ip, port)
+    replication_factor = int(sys.argv[3])
+    bootstrap = BootstrapNode(ip, port, replication_factor)
 
     # Keep the bootstrap node running indefinitely.
     try:

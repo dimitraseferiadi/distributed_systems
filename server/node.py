@@ -28,7 +28,7 @@ def normalize_node(node):
     return node
 
 class ChordNode:
-    def __init__(self, ip: str, port: int, bootstrap_ip: str = None, bootstrap_port: int = None):
+    def __init__(self, ip: str, port: int, replication_factor: int, bootstrap_ip: str = None, bootstrap_port: int = None):
         self.ip = ip
         self.port = port
         self.address = (self.ip, self.port)
@@ -38,7 +38,7 @@ class ChordNode:
         self.successor = None  # Initially, self is the only node in the ring.
         self.data_store = {}  # <key: hashed_key, value: value> dictionary for key-value pairs
         
-        self.replication_factor = 1
+        self.replication_factor = replication_factor
 
         # Bootstrap node information for joining the ring.
         self.bootstrap_ip = bootstrap_ip
@@ -181,7 +181,32 @@ class ChordNode:
             else:
                 print("[ERROR] transfer_keys received invalid data format")
                 return {"status": "error", "message": "Invalid data format"}
-        
+        elif req_type == "replicate_insert":
+            key_id = request["key_id"]
+            value = request["value"]
+            remaining = request.get("remaining", 0)
+            self.data_store[key_id] = value
+            print(f"[REPLICATE INSERT] Node {self.node_id} stored replica for key {key_id}")
+            if remaining > 1:
+                self.replicate_insert(key_id, value, remaining=remaining - 1)
+            return {"status": "success", "node": self.node_id}
+        elif req_type == "replicate_delete":
+            key = request["key"]
+            remaining = request.get("remaining", 0)
+            key_id = sha1_hash(key)
+            if key_id in self.data_store:
+                del self.data_store[key_id]
+                print(f"[REPLICATE DELETE] Node {self.node_id} deleted replica for key {key}")
+            if remaining > 1:
+                self.replicate_delete(key, remaining=remaining - 1)
+            return {"status": "success", "node": self.node_id}
+        elif req_type == "repair_replication":
+            for key_id, value in self.data_store.items():
+                if self.is_responsible_for_key(key_id):
+                    print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
+                    self.replicate_insert(key_id=str(key_id), value=value, remaining=self.replication_factor - 1)
+            return {"status": "success"}
+
         return {"status": "error", "message": "Unknown request type"}
     
     def insert(self, key: str, value: str) -> dict:
@@ -193,6 +218,8 @@ class ChordNode:
         if self.is_responsible_for_key(key_id):
             self.data_store[key_id] = value
             print(f"[INSERT] Stored at Node {self.node_id}: {key} → {value}")
+            self.replicate_insert(key_id, value, remaining=self.replication_factor - 1)
+            print(f"replication_factor: {self.replication_factor}")
             return {"status": "success", "node": self.node_id, "message": "Key stored"}
         
         # Look up the correct successor using the key's hash (not self.node_id!)
@@ -208,6 +235,21 @@ class ChordNode:
             "value": value
         })
         return response if response else {"status": "error", "message": "Failed to store key"}
+
+    def replicate_insert(self, key_id: str, value: str, remaining: int):
+        if remaining <= 0:
+            return
+        # If the ring has only one node, nothing to replicate.
+        if self.successor == (self.ip, self.port, self.node_id):
+            return
+        # Forward the replication request to your successor.
+        message = {
+            "type": "replicate_insert",
+            "key_id": key_id,
+            "value": value,
+            "remaining": remaining
+        }
+        self.send_message((self.successor[0], self.successor[1]), message)
 
     def is_responsible_for_key(self, key_id):
         """Check if this node is responsible for storing the given key."""
@@ -359,11 +401,9 @@ class ChordNode:
                 value = self.data_store[key_id]
                 return {"status": "success", "value": value}
             else:
-                print(f"key not found")
                 return {"status": "error", "message": "Key not found"}
         
         successor = self.find_successor(key_id)
-        print(f"successor: {successor}")
 
         if successor == (self.ip, self.port, self.node_id):
             print(f"[WARNING] Detected self-loop while querying {key}. Returning error.")
@@ -424,6 +464,7 @@ class ChordNode:
             if key_id in self.data_store:
                 del self.data_store[key_id]
                 print(f"[DELETE] Key '{key}' deleted from node {self.node_id}")
+                self.replicate_delete(key, remaining=self.replication_factor - 1)
                 return {"status": "success", "message": f"Key '{key}' deleted"}
             else:
                 print(f"[DELETE] Key '{key}' not found at node {self.node_id}")
@@ -441,7 +482,18 @@ class ChordNode:
         })
         return response
 
-    
+    def replicate_delete(self, key: str, remaining: int):
+        if remaining <= 0:
+            return
+        if self.successor == (self.ip, self.port, self.node_id):
+            return
+        message = {
+            "type": "replicate_delete",
+            "key": key,
+            "remaining": remaining
+        }
+        self.send_message((self.successor[0], self.successor[1]), message)
+
     def join_ring(self):
         print(f"[JOIN] Node {self.node_id} attempting to join via bootstrap {self.bootstrap_ip}:{self.bootstrap_port}")
             
@@ -522,15 +574,17 @@ class ChordNode:
 if __name__ == "__main__":
     import sys
     # Example usage:
-    # Run as: python node.py <ip> <port> [<bootstrap_ip> <bootstrap_port>]
-    if len(sys.argv) < 3:
-        print("Usage: python node.py <ip> <port> [<bootstrap_ip> <bootstrap_port>]")
+    # Run as: python node.py <ip> <port> <replication_factor> [<bootstrap_ip> <bootstrap_port>]
+    # python node.py 127.0.0.1 6000 3 127.0.0.1 5000
+    if len(sys.argv) < 4:
+        print("Usage: python node.py <ip> <port> <replication_factor> [<bootstrap_ip> <bootstrap_port>]")
         sys.exit(1)
 
     ip = sys.argv[1]
     port = int(sys.argv[2])
-    bootstrap_ip = sys.argv[3] if len(sys.argv) > 3 else None
-    bootstrap_port = int(sys.argv[4]) if len(sys.argv) > 4 else None
+    replication_factor = int(sys.argv[3])
+    bootstrap_ip = sys.argv[4] if len(sys.argv) > 4 else None
+    bootstrap_port = int(sys.argv[5]) if len(sys.argv) > 5 else None
 
-    node = ChordNode(ip, port, bootstrap_ip, bootstrap_port)
+    node = ChordNode(ip, port, replication_factor, bootstrap_ip, bootstrap_port)
     node.run()
