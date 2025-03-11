@@ -224,7 +224,7 @@ class ChordNode:
         
         # Look up the correct successor using the key's hash (not self.node_id!)
         successor = self.find_successor(key_id)
-        if successor == (self.ip, self.port, self.node_id):
+        if successor == [self.ip, self.port, self.node_id]:
             self.data_store[key_id] = value
             print(f"[INSERT] (After lookup) Key belongs here. Stored locally at Node {self.node_id}")
             return {"status": "success", "node": self.node_id, "message": "Key stored locally"}
@@ -253,7 +253,7 @@ class ChordNode:
 
     def is_responsible_for_key(self, key_id):
         """Check if this node is responsible for storing the given key."""
-        if self.predecessor is None:
+        if self.predecessor is None or self.successor == (self.ip, self.port, self.node_id):
             return True  # If there's no predecessor, this node is alone in the ring.
 
         pred_id = self.predecessor[2]  # Predecessor node ID
@@ -266,8 +266,8 @@ class ChordNode:
         self_id = (self.ip, self.port, self.node_id)
 
         # If we've hit the hop limit, assume self.
-        if hops >= MAX_HOPS:
-            return self_id
+        #if hops >= MAX_HOPS:
+         #   return self_id
 
         # If the ring is a one-node ring, return self.
         if self.successor == self_id:
@@ -345,11 +345,11 @@ class ChordNode:
             return
         
         # Use your logic (e.g., in_range) to decide if the update is valid.
-        if in_range(new_succ[2], self.successor[2], self.node_id, include_end=False):
+        if in_range(new_succ[2], self.node_id, self.successor[2], include_end=False):
             self.successor = new_succ
             print(f"[UPDATE] New successor updated to: {self.successor}")
-        #else:
-            #print(f"[WARNING] Ignored invalid successor update: {node_info}")
+        else:
+            print(f"[WARNING] Ignored invalid successor update: {node_info}")
 
     def handle_global_query(self, request: dict) -> dict:
         """
@@ -367,11 +367,15 @@ class ChordNode:
         collected_data.update(self.data_store)
 
         # If this query has looped back to the origin, return the collected data
+        print(f"origin: {origin}")
         if not initial and origin == (self.ip, self.port, self.node_id):
             return {"status": "success", "data": collected_data}
         
         # If only one node in the ring, return data directly
-        if self.successor == (self.ip, self.port, self.node_id):
+        print(f"self.successor: {self.successor}")
+        print(f"(self.ip, self.port, self.node_id): {tuple([self.ip, self.port, self.node_id])}")
+
+        if self.successor == tuple([self.ip, self.port, self.node_id]):
             return {"status": "success", "data": collected_data}
 
         # Prepare to forward the request
@@ -405,7 +409,7 @@ class ChordNode:
         
         successor = self.find_successor(key_id)
 
-        if successor == (self.ip, self.port, self.node_id):
+        if successor == [self.ip, self.port, self.node_id]:
             print(f"[WARNING] Detected self-loop while querying {key}. Returning error.")
             return {"status": "error", "message": "Key not found in ring"}
         response = self.send_message((successor[0], successor[1]), {
