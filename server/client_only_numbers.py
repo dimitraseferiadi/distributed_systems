@@ -1,6 +1,5 @@
 import socket
 import json
-import shlex  # ✅ Properly handle quoted input
 
 def send_request(command_type, data=None):
     """Send a request to the bootstrap node."""
@@ -15,45 +14,28 @@ def send_request(command_type, data=None):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((bootstrap_ip, bootstrap_port))
             s.send(json.dumps(request).encode())
-
-            # ✅ Read response in chunks to avoid truncation
-            data = b""
-            while True:
-                chunk = s.recv(4096)  
-                if not chunk:
-                    break
-                data += chunk
-            
-            response = json.loads(data.decode())  # ✅ Ensure full JSON is received
+            response = json.loads(s.recv(4096).decode())
             return response
-    except json.JSONDecodeError:
-        return {"status": "error", "message": "Invalid JSON response from server"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 def main():
     print("Chord DHT CLI - Type 'help' for commands.")
     while True:
-        try:
-            command = shlex.split(input("chord> ").strip())  # ✅ Handles quotes correctly
-        except ValueError as e:
-            print(f"[ERROR] Invalid command format: {e}")
-            continue
-        
+        command = input("chord> ").strip().split()
         if not command:
             continue
         
         cmd = command[0].lower()
         
-        if cmd == "insert" and len(command) >= 3:
-            key = command[1]
-            value = " ".join(command[2:])  # ✅ Capture full value (multi-word support)
+        if cmd == "insert" and len(command) == 3:
+            key, value = command[1], command[2]
             response = send_request("insert", {"key": key, "value": value})
         elif cmd == "delete" and len(command) == 2:
             key = command[1]
             response = send_request("delete", {"key": key})
-        elif cmd == "query" and len(command) >= 2:
-            key = " ".join(command[1:])  # ✅ Capture full query, including multi-word keys
+        elif cmd == "query" and len(command) == 2:
+            key = command[1]
             response = send_request("query", {"key": key})
         elif cmd == "depart" and len(command) == 2:
             node_id = command[1]
@@ -79,9 +61,7 @@ Commands:
             print("Invalid command. Type 'help' for a list of commands.")
             continue
         
-        # ✅ Prettier response formatting
-        print(f"Response: {json.dumps(response, indent=2)}")
+        print("Response:", response)
 
 if __name__ == "__main__":
     main()
-

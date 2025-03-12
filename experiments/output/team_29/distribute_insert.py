@@ -5,31 +5,21 @@ import json
 import sys
 import time
 
-# Configurations: Set the node's IP & port
+# Configurations
 ZIP_FILE = "insert.zip"  # Name of the zip file
+BOOTSTRAP_IP = "127.0.0.1"  # Localhost for testing
+BOOTSTRAP_PORT = 5000  # Default bootstrap node port
 
-# Function to check node availability
-def check_node_availability(node_ip, node_port):
-    """Checks if a node is available by attempting to connect to its port."""
+# Function to check if the bootstrap node is available
+def check_bootstrap():
+    """Checks if the bootstrap node is available."""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(3)  # Timeout for connection
-            s.connect((node_ip, node_port))
+            s.settimeout(3)
+            s.connect((BOOTSTRAP_IP, BOOTSTRAP_PORT))
             return True
     except (socket.error, ConnectionRefusedError):
         return False
-
-# Function to get the list of active nodes
-def get_active_nodes(all_nodes):
-    """Returns a list of active nodes by checking their availability."""
-    active_nodes = []
-    for node_ip, node_port in all_nodes:
-        if check_node_availability(node_ip, node_port):
-            print(f"[INFO] Node {node_ip}:{node_port} is active.")
-            active_nodes.append((node_ip, node_port))
-        else:
-            print(f"[INFO] Node {node_ip}:{node_port} is not active.")
-    return active_nodes
 
 # Step 1: Unzip the file
 def unzip_files(zip_file):
@@ -37,70 +27,48 @@ def unzip_files(zip_file):
     if not os.path.exists(zip_file):
         print(f"[ERROR] {zip_file} not found!")
         return []
-
+    
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall("unzipped_files")  # Extract into a folder
-    return sorted(os.listdir("unzipped_files"))  # Return file names sorted
+    return sorted(os.listdir("unzipped_files"))  # Return sorted file names
 
-# Step 2: Insert data into DHT
-def insert_into_dht(node_ip, node_port, key, value):
-    """Sends an insert request to the given DHT node."""
+# Step 2: Send insertion request to Bootstrap Node
+def insert_into_dht(key, value):
+    """Sends an insert request to the Bootstrap Node, which determines the target DHT node."""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((node_ip, node_port))
+            s.connect((BOOTSTRAP_IP, BOOTSTRAP_PORT))
             request = {"type": "insert", "key": key, "value": value}
             s.send(json.dumps(request).encode())
             response = json.loads(s.recv(4096).decode())
-            print(f"[INSERT] {key}: {value} -> {response['status']}")
+            print(f"[INSERT] {key}: {value} -> {response.get('status', 'No response')}")
     except Exception as e:
         print(f"[ERROR] Failed to insert {key}: {e}")
 
 # Step 3: Process files and insert contents
-def process_files(active_nodes):
+def process_files():
     files = unzip_files(ZIP_FILE)
     if not files:
         return
-
-    # Round-robin file distribution among active nodes
-    num_nodes = len(active_nodes)
+    
     start_time_total = time.time()
-    for i, file_to_process in enumerate(files):
-        node_index = i % num_nodes  # Round-robin assignment of files to nodes
-        node_ip, node_port = active_nodes[node_index]
-
-        print(f"[PROCESS] Node {node_ip}:{node_port} handling {file_to_process}")
-        start_time_node = time.time()
+    for file_to_process in files:
+        print(f"[PROCESS] Sending data from {file_to_process} to Bootstrap Node")
+        start_time_file = time.time()
         with open(os.path.join("unzipped_files", file_to_process), "r") as f:
             for line in f:
                 song = line.strip()
                 if song:
-                    insert_into_dht(node_ip, node_port, song, file_to_process)
-        print(f"[TIME] {file_to_process} processed in {time.time() - start_time_node:.4f} seconds")
+                    insert_into_dht(song, song)
+        print(f"[TIME] {file_to_process} processed in {time.time() - start_time_file:.4f} seconds")
 
     print(f"\n[TOTAL TIME] All requests processed in {time.time() - start_time_total:.4f} seconds")
 
 if __name__ == "__main__":
-    # Define a list of all possible nodes (including inactive ones)
-    all_nodes = [
-        ("10.0.36.124", 6000),
-        ("10.0.36.15", 6000),
-        #("10.0.0.3", 5003),
-        #("10.0.0.4", 5004),
-        #("10.0.0.5", 5005),
-        #("10.0.0.6", 5006),
-        #("10.0.0.7", 5007),
-        #("10.0.0.8", 5008),
-        #("10.0.0.9", 5009),
-        #("10.0.0.10", 5010),
-    ]
-
-    # Get the active nodes from the system
-    active_nodes = get_active_nodes(all_nodes)
-
-    if not active_nodes:
-        print("[ERROR] No active nodes found! Exiting...")
+    if not check_bootstrap():
+        print("[ERROR] Bootstrap Node is not active! Exiting...")
         sys.exit(1)
-
-    # Process files and insert them into the assigned active nodes
-    process_files(active_nodes)
+    
+    print("[INFO] Bootstrap Node is active. Proceeding with file processing...")
+    process_files()
 
