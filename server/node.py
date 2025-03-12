@@ -206,7 +206,6 @@ class ChordNode:
                     self.replicate_delete(key, remaining=remaining - 1)
                 return {"status": "success", "node": self.node_id}
             elif req_type == "repair_replication":
-                print(f"self.data_strore: {self.data_strore}")
                 for key_id, value in self.data_store.items():
                     if self.is_responsible_for_key(key_id):
                         print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
