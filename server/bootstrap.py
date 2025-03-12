@@ -9,6 +9,16 @@ import hashlib
 def sha1_hash(key: str) -> int:
     return int(hashlib.sha1(key.encode()).hexdigest(), 16)
 
+def normalize_node(node):
+    """Ensure that a node is in tuple form: (ip, port, node_id)."""
+    if node is None:
+        return None
+    if isinstance(node, dict):
+        return (node["ip"], node["port"], node["node_id"])
+    elif isinstance(node, list):
+        return tuple(node)
+    return node
+
 class BootstrapNode(ChordNode):
     def __init__(self, ip: str, port: int, replication_factor: int):
         super().__init__(ip, port, replication_factor)
@@ -133,6 +143,7 @@ class BootstrapNode(ChordNode):
             print(f"[BOOTSTRAP] Node {departing_node_id} removed. Updated nodes: {self.nodes}")
 
             # Update Bootstrap’s successor if the departed node was its direct successor
+            self.successor = normalize_node(self.successor)
             if self.successor[2] == departing_node_id:
                 new_bootstrap_successor = self.nodes[0] if self.nodes else {"ip": self.ip, "port": self.port, "node_id": self.node_id}
                 self.successor = (new_bootstrap_successor["ip"], 
