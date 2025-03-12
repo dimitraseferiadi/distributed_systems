@@ -13,7 +13,7 @@ NODE_IP = "127.0.0.1"
 NUM_NODES = 3
 BASE_PORT = 6000  
 
-REPLICATION_FACTOR = 2
+REPLICATION_FACTOR = 3
 
 # Start Windows Terminal command
 wt_cmd = 'wt new-tab'

@@ -9,6 +9,16 @@ import hashlib
 def sha1_hash(key: str) -> int:
     return int(hashlib.sha1(key.encode()).hexdigest(), 16)
 
+def normalize_node(node):
+    """Ensure that a node is in tuple form: (ip, port, node_id)."""
+    if node is None:
+        return None
+    if isinstance(node, dict):
+        return (node["ip"], node["port"], node["node_id"])
+    elif isinstance(node, list):
+        return tuple(node)
+    return node
+
 class BootstrapNode(ChordNode):
     def __init__(self, ip: str, port: int, replication_factor: int):
         super().__init__(ip, port, replication_factor)
@@ -16,6 +26,7 @@ class BootstrapNode(ChordNode):
         
         # Store nodes as dictionaries with keys: ip, port, node_id
         self.nodes = [{"ip": self.ip, "port": self.port, "node_id": self.node_id}]
+        self.join_order = [self.nodes[0]]
 
         # Ensure thread safety
         self.lock = threading.Lock()  
@@ -38,19 +49,23 @@ class BootstrapNode(ChordNode):
             # Ensure the bootstrap node is in the nodes list.
             if not any(node["node_id"] == self.node_id for node in self.nodes):
                 self.nodes.append(bootstrap_info)
+            if not any(node["node_id"] == self.node_id for node in self.join_order):
+                self.join_order.append(bootstrap_info)
             
             # Check for duplicates.
             if any(node["node_id"] == new_node_info["node_id"] for node in self.nodes):
                 return {"status": "error", "message": "Node already exists"}
+            if any(node["node_id"] == new_node_info["node_id"] for node in self.join_order):
+                return {"status": "error", "message": "Node already exists"}
             
             # Add the new node.
             self.nodes.append(new_node_info)
+            self.join_order.append(new_node_info)
             self.nodes.sort(key=lambda node: node["node_id"])
             
             # Determine the new node's neighbors.
             predecessor, successor = self.find_neighbors(new_node_info["node_id"])
             
-            # **Update the bootstrap node's own successor pointer.**
             # Find the bootstrap node in the sorted list.
             bootstrap_index = next(i for i, node in enumerate(self.nodes) if node["node_id"] == self.node_id)
             # The new successor for bootstrap is the next node in the sorted order.
@@ -117,6 +132,7 @@ class BootstrapNode(ChordNode):
 
             # Notify predecessor and successor to update their pointers
             if predecessor:
+                self.send_message(predecessor, {"type": "reset_successor"}) 
                 self.send_message(predecessor, {"type": "update_successor", "node_info": successor})
             if successor:
                 self.send_message(successor, {"type": "reset_predecessor"}) 
@@ -129,9 +145,11 @@ class BootstrapNode(ChordNode):
 
             # Remove the departing node from Bootstrap's list
             self.nodes = [node for node in self.nodes if node["node_id"] != departing_node_id]
+            self.join_order = [node for node in self.join_order if node["node_id"] != departing_node_id]
             print(f"[BOOTSTRAP] Node {departing_node_id} removed. Updated nodes: {self.nodes}")
 
             # Update Bootstrap’s successor if the departed node was its direct successor
+            self.successor = normalize_node(self.successor)
             if self.successor[2] == departing_node_id:
                 new_bootstrap_successor = self.nodes[0] if self.nodes else {"ip": self.ip, "port": self.port, "node_id": self.node_id}
                 self.successor = (new_bootstrap_successor["ip"], 
@@ -160,12 +178,12 @@ class BootstrapNode(ChordNode):
         Returns the current ring topology, only including active nodes.
         """
         active_nodes = []
-        for node in self.nodes:
+        for node in self.join_order:
             if self.is_node_alive(node):
                 active_nodes.append(node)
 
-        with self.lock:
-            self.nodes = active_nodes  # Remove unreachable nodes
+        with self.lock: 
+            self.join_order = active_nodes 
 
         return {"status": "success", "overlay": active_nodes}
 
@@ -212,13 +230,6 @@ if __name__ == "__main__":
     # Keep the bootstrap node running indefinitely.
     try:
         while True:
-            command = input("Bootstrap> ").strip().lower()
-            if command == "overlay":
-                print(bootstrap.get_overlay())
-            elif command == "help":
-                print("Commands:\n overlay - Print current ring topology\n help - Show this message\n exit - Stop the bootstrap node")
-            elif command == "exit":
-                print("Exiting bootstrap node.")
-                break
+            continue
     except KeyboardInterrupt:
         print("\n[BOOTSTRAP] Shutting down.")
