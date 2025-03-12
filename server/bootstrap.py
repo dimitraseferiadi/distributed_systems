@@ -20,8 +20,8 @@ def normalize_node(node):
     return node
 
 class BootstrapNode(ChordNode):
-    def __init__(self, ip: str, port: int, replication_factor: int):
-        super().__init__(ip, port, replication_factor)
+    def __init__(self, ip: str, port: int, replication_factor: int, replication_consistency: str = "eventual"):
+        super().__init__(ip, port, replication_factor, replication_consistency)
         print(f"[BOOTSTRAP] Starting bootstrap node with ID: {self.node_id} at {self.ip}:{self.port}")
         
         # Store nodes as dictionaries with keys: ip, port, node_id
@@ -217,15 +217,16 @@ class BootstrapNode(ChordNode):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) < 4:
-        print("Usage: python bootstrap.py <ip> <port> <replication_factor")
+    if len(sys.argv) < 5:
+        print("Usage: python bootstrap.py <ip> <port> <replication_factor> <replication_consistency>")
         # python bootstrap.py 127.0.0.1 5000
         exit(1)
 
     ip = sys.argv[1]
     port = int(sys.argv[2])
     replication_factor = int(sys.argv[3])
-    bootstrap = BootstrapNode(ip, port, replication_factor)
+    replication_consistency = sys.argv[4]
+    bootstrap = BootstrapNode(ip, port, replication_factor, replication_consistency)
 
     # Keep the bootstrap node running indefinitely.
     try:
