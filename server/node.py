@@ -109,8 +109,6 @@ class ChordNode:
             except Exception as e:
                 print(f"[ERROR] Closing socket failed: {e}")
 
-
-
     def process_request(self, request: dict) -> dict:
         """
         Process different types of incoming requests.
