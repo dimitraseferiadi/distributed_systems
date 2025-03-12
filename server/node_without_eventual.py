@@ -2,8 +2,6 @@ import socket
 import threading
 import hashlib
 import json
-import threading
-import time
 
 # Utility function for hashing keys using SHA1
 def sha1_hash(key: str) -> int:
@@ -111,20 +109,8 @@ class ChordNode:
             except Exception as e:
                 print(f"[ERROR] Closing socket failed: {e}")
 
-<<<<<<< HEAD
-=======
 
-    def async_replicate(self, message, replica_list):
-        """Asynchronously replicate a write message to a list of replicas."""
-        def replicate():
-            # Optionally add a small delay to simulate lazy propagation.
-            time.sleep(1)
-            for replica in replica_list:
-                # Send the replication message to each replica.
-                self.send_message((replica[0], replica[1]), message)
-        threading.Thread(target=replicate, daemon=True).start()
 
->>>>>>> 8adaf33 (first try on eventual)
     def process_request(self, request: dict) -> dict:
         """
         Process different types of incoming requests.
@@ -231,8 +217,7 @@ class ChordNode:
         except Exception as e:
             print(f"[ERROR] process_request exception: {e}")
             return {"status": "error", "message": str(e)}
-
-
+    
     def insert(self, key: str, value: str) -> dict:
         """Insert a key-value pair into the correct node."""
         key_id = sha1_hash(key)
@@ -242,46 +227,23 @@ class ChordNode:
         if self.is_responsible_for_key(key_id):
             self.data_store[key_id] = value
             print(f"[INSERT] Stored at Node {self.node_id}: {key} → {value}")
+            self.replicate_insert(key_id, value, remaining=self.replication_factor - 1)
+            print(f"replication_factor: {self.replication_factor}")
+            return {"status": "success", "node": self.node_id, "message": "Key stored"}
         
-        # Instead of waiting for replication to finish, spawn async replication.
-            replica_message = {
-                "type": "replicate_insert",
-                "key_id": key_id,
-                "value": value,
-                "remaining": self.replication_factor - 1
-            }
-        # Get the list of replica nodes. You can implement get_replica_nodes() 
-        # based on your ring structure. Here we assume the successor chain.
-            replicas = []
-            next_node = normalize_node(self.successor)
-            for _ in range(self.replication_factor - 1):
-                if next_node != (self.ip, self.port, self.node_id):
-                    replicas.append(next_node)
-                    # For a basic version, get the next successor in the ring.
-                    # (In a full implementation you’d have a finger table.)
-                    next_node = self.send_message((next_node[0], next_node[1]), {"type": "get_neighbors"}).get("successor", next_node)
-                else:
-                    break
-        
-        # Spawn asynchronous replication.
-            self.async_replicate(replica_message, replicas)
-        
-            return {"status": "success", "node": self.node_id, "message": "Key stored (primary) – replication in progress"}
-    
-    # Otherwise, forward the request to the correct node.
+        # Look up the correct successor using the key's hash (not self.node_id!)
         successor = self.find_successor(key_id)
         if successor == [self.ip, self.port, self.node_id]:
             self.data_store[key_id] = value
             print(f"[INSERT] (After lookup) Key belongs here. Stored locally at Node {self.node_id}")
             return {"status": "success", "node": self.node_id, "message": "Key stored locally"}
-    
+        
         response = self.send_message((successor[0], successor[1]), {
             "type": "insert",
             "key": key,
             "value": value
         })
         return response if response else {"status": "error", "message": "Failed to store key"}
-
 
     def replicate_insert(self, key_id: str, value: str, remaining: int):
         if remaining <= 0:
@@ -505,35 +467,32 @@ class ChordNode:
         })
 
     def delete(self, key: str) -> dict:
-        key_id = sha1_hash(key)
+        """
+        Deletes a key-value pair from the distributed hash table.
+        """
+        key_id = sha1_hash(key)  # Hash the key to find its responsible node
+
+        # Check if this node is responsible for the key
         if self.is_responsible_for_key(key_id):
             if key_id in self.data_store:
                 del self.data_store[key_id]
                 print(f"[DELETE] Key '{key}' deleted from node {self.node_id}")
-            # Spawn async replication deletion.
-                replica_message = {
-                    "type": "replicate_delete",
-                    "key": key,
-                    "remaining": self.replication_factor - 1
-                }
-            # Here, determine replica nodes similarly.
-                replicas = []
-                next_node = normalize_node(self.successor)
-                for _ in range(self.replication_factor - 1):
-                    if next_node != (self.ip, self.port, self.node_id):
-                        replicas.append(next_node)
-                        next_node = self.send_message((next_node[0], next_node[1]), {"type": "get_neighbors"}).get("successor", next_node)
-                    else:
-                        break
-                self.async_replicate(replica_message, replicas)
-                return {"status": "success", "message": f"Key '{key}' deleted"}
+                self.replicate_delete(key, remaining=self.replication_factor - 1)
+                return {"status": "success", "message": f"Key {key} deleted"}
             else:
+                print(f"[DELETE] Key '{key}' not found at node {self.node_id}")
                 return {"status": "error", "message": "Key not found"}
-    
+
+        # Otherwise, forward the request to the responsible node
         successor = self.find_successor(key_id)
         if successor == (self.ip, self.port, self.node_id):
+            print(f"[ERROR] delete: Responsible node thinks it's itself but key not found")
             return {"status": "error", "message": "Key not found in ring"}
-        response = self.send_message((successor[0], successor[1]), {"type": "delete", "key": key})
+
+        response = self.send_message((successor[0], successor[1]), {
+            "type": "delete",
+            "key": key
+        })
         return response
 
     def replicate_delete(self, key: str, remaining: int):
