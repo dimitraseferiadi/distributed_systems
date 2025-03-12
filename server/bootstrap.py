@@ -117,6 +117,7 @@ class BootstrapNode(ChordNode):
 
             # Notify predecessor and successor to update their pointers
             if predecessor:
+                self.send_message(predecessor, {"type": "reset_successor"}) 
                 self.send_message(predecessor, {"type": "update_successor", "node_info": successor})
             if successor:
                 self.send_message(successor, {"type": "reset_predecessor"}) 
@@ -212,13 +213,6 @@ if __name__ == "__main__":
     # Keep the bootstrap node running indefinitely.
     try:
         while True:
-            command = input("Bootstrap> ").strip().lower()
-            if command == "overlay":
-                print(bootstrap.get_overlay())
-            elif command == "help":
-                print("Commands:\n overlay - Print current ring topology\n help - Show this message\n exit - Stop the bootstrap node")
-            elif command == "exit":
-                print("Exiting bootstrap node.")
-                break
+            continue
     except KeyboardInterrupt:
         print("\n[BOOTSTRAP] Shutting down.")

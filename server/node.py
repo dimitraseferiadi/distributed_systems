@@ -25,6 +25,8 @@ def normalize_node(node):
         return None
     if isinstance(node, dict):
         return (node["ip"], node["port"], node["node_id"])
+    elif isinstance(node, list):
+        return tuple(node)
     return node
 
 class ChordNode:
@@ -117,97 +119,104 @@ class ChordNode:
         """
    
         req_type = request.get("type")
-
-        if req_type == "insert":
-            return self.insert(request["key"], request["value"])
-        elif (req_type == "query" and request.get("key") == "*"):
-            new_request = {
-                "type": "query_all",
-                "origin": (self.ip, self.port, self.node_id),  # this node is the origin
-                "data": self.data_store.copy(),
-                "initial": True 
-            }
-            return self.handle_global_query(new_request)
-        elif req_type == "query_all":
-            return self.handle_global_query(request)
-        elif req_type == "query":
-            return self.normal_query(request["key"])
-        elif req_type == "delete":
-            return self.delete(request["key"])
-        elif req_type == "find_successor":
-            hops = request.get("hops", 0)
-            successor = self.find_successor(request["node_id"], hops)
-            return {"status": "success", "successor": successor}
-        elif req_type == "update_predecessor":
-            node_data = request.get("node") or request.get("node_info")
-            if not node_data:
-                return {"status": "error", "message": "Missing node data for update_predecessor"}
-            self.update_predecessor(node_data)
-            return {"status": "success"}
-        elif req_type == "update_successor":
-            node_data = request.get("node") or request.get("node_info")
-            if not node_data:
-                return {"status": "error", "message": "Missing node data for update_successor"}
-            self.update_successor(node_data)
-            return {"status": "success"}
-        elif req_type == "reset_predecessor":
-            self.reset_predecessor()
-            return {"status": "success"}
-        elif req_type == "get_predecessor":
-            return {"status": "success", "predecessor": self.predecessor}
-        elif req_type == "shutdown":
-            print(f"[DEPART] Node {self.node_id} is shutting down.")
-            self.running = False
-            return {"status": "success", "message": "Node shutting down."}
-        elif req_type == "get_neighbors":
-            return {
-                "status": "success",
-                "predecessor": tuple(self.predecessor) if self.predecessor else None,
-                "successor": tuple(self.successor) if self.successor else None,
-                "keys": self.data_store
-            }
-        elif req_type == "get_keys":
-            print(f"[TRANSFER] Node {self.node_id} providing {len(self.data_store)} keys for transfer.")
-            return {"status": "success", "keys": self.data_store}
-        elif req_type == "transfer_keys":
-            keys_to_transfer = request.get("keys", {})
-            if isinstance(keys_to_transfer, dict):  # Ensure it's a dictionary before merging
-                print(f"keys_to_transfer: {keys_to_transfer}")
-                cleaned_keys = {int(key.strip()): value for key, value in keys_to_transfer.items()}
-                self.data_store.update(cleaned_keys)
-                print(f"self.data_store: {self.data_store}")
-                print(f"[TRANSFER] Received {len(keys_to_transfer)} keys.")
+        try:
+            if req_type == "insert":
+                return self.insert(request["key"], request["value"])
+            elif (req_type == "query" and request.get("key") == "*"):
+                new_request = {
+                    "type": "query_all",
+                    "origin": (self.ip, self.port, self.node_id),  # this node is the origin
+                    "data": self.data_store.copy(),
+                    "initial": True 
+                }
+                return self.handle_global_query(new_request)
+            elif req_type == "query_all":
+                return self.handle_global_query(request)
+            elif req_type == "query":
+                return self.normal_query(request["key"])
+            elif req_type == "delete":
+                return self.delete(request["key"])
+            elif req_type == "find_successor":
+                hops = request.get("hops", 0)
+                successor = self.find_successor(request["node_id"], hops)
+                return {"status": "success", "successor": successor}
+            elif req_type == "update_predecessor":
+                node_data = request.get("node") or request.get("node_info")
+                if not node_data:
+                    return {"status": "error", "message": "Missing node data for update_predecessor"}
+                self.update_predecessor(node_data)
                 return {"status": "success"}
-            else:
-                print("[ERROR] transfer_keys received invalid data format")
-                return {"status": "error", "message": "Invalid data format"}
-        elif req_type == "replicate_insert":
-            key_id = request["key_id"]
-            value = request["value"]
-            remaining = request.get("remaining", 0)
-            self.data_store[key_id] = value
-            print(f"[REPLICATE INSERT] Node {self.node_id} stored replica for key {key_id}")
-            if remaining > 1:
-                self.replicate_insert(key_id, value, remaining=remaining - 1)
-            return {"status": "success", "node": self.node_id}
-        elif req_type == "replicate_delete":
-            key = request["key"]
-            remaining = request.get("remaining", 0)
-            key_id = sha1_hash(key)
-            if key_id in self.data_store:
-                del self.data_store[key_id]
-                print(f"[REPLICATE DELETE] Node {self.node_id} deleted replica for key {key}")
-            if remaining > 1:
-                self.replicate_delete(key, remaining=remaining - 1)
-            return {"status": "success", "node": self.node_id}
-        elif req_type == "repair_replication":
-            for key_id, value in self.data_store.items():
-                if self.is_responsible_for_key(key_id):
-                    print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
-                    self.replicate_insert(key_id=str(key_id), value=value, remaining=self.replication_factor - 1)
-            return {"status": "success"}
+            elif req_type == "update_successor":
+                node_data = request.get("node") or request.get("node_info")
+                if not node_data:
+                    return {"status": "error", "message": "Missing node data for update_successor"}
+                self.update_successor(node_data)
+                return {"status": "success"}
+            elif req_type == "reset_successor":
+                self.reset_successor()
+                return {"status": "success"}
+            elif req_type == "reset_predecessor":
+                self.reset_predecessor()
+                return {"status": "success"}
+            elif req_type == "get_predecessor":
+                return {"status": "success", "predecessor": self.predecessor}
+            elif req_type == "shutdown":
+                print(f"[DEPART] Node {self.node_id} is shutting down.")
+                self.running = False
+                return {"status": "success", "message": "Node shutting down."}
+            elif req_type == "get_neighbors":
+                return {
+                    "status": "success",
+                    "predecessor": tuple(self.predecessor) if self.predecessor else None,
+                    "successor": tuple(self.successor) if self.successor else None,
+                    "keys": self.data_store
+                }
+            elif req_type == "get_keys":
+                print(f"[TRANSFER] Node {self.node_id} providing {len(self.data_store)} keys for transfer.")
+                return {"status": "success", "keys": self.data_store}
+            elif req_type == "transfer_keys":
+                keys_to_transfer = request.get("keys", {})
+                if isinstance(keys_to_transfer, dict):  # Ensure it's a dictionary before merging
+                    print(f"keys_to_transfer: {keys_to_transfer}")
+                    cleaned_keys = {int(key.strip()): value for key, value in keys_to_transfer.items()}
+                    self.data_store.update(cleaned_keys)
+                    print(f"self.data_store: {self.data_store}")
+                    print(f"[TRANSFER] Received {len(keys_to_transfer)} keys.")
+                    return {"status": "success"}
+                else:
+                    print("[ERROR] transfer_keys received invalid data format")
+                    return {"status": "error", "message": "Invalid data format"}
+            elif req_type == "replicate_insert":
+                key_id = request["key_id"]
+                value = request["value"]
+                remaining = request.get("remaining", 0)
+                self.data_store[key_id] = value
+                print(f"[REPLICATE INSERT] Node {self.node_id} stored replica for key {key_id}")
+                if remaining > 1:
+                    self.replicate_insert(key_id, value, remaining=remaining - 1)
+                return {"status": "success", "node": self.node_id}
+            elif req_type == "replicate_delete":
+                key = request["key"]
+                remaining = request.get("remaining", 0)
+                key_id = sha1_hash(key)
+                if key_id in self.data_store:
+                    del self.data_store[key_id]
+                    print(f"[REPLICATE DELETE] Node {self.node_id} deleted replica for key {key}")
+                if remaining > 1:
+                    self.replicate_delete(key, remaining=remaining - 1)
+                return {"status": "success", "node": self.node_id}
+            elif req_type == "repair_replication":
+                for key_id, value in self.data_store.items():
+                    if self.is_responsible_for_key(key_id):
+                        print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
+                        self.replicate_insert(key_id=str(key_id), value=value, remaining=self.replication_factor - 1)
+                return {"status": "success"}
 
-        return {"status": "error", "message": "Unknown request type"}
+            return {"status": "error", "message": "Unknown request type"}
+        
+        except Exception as e:
+            print(f"[ERROR] process_request exception: {e}")
+            return {"status": "error", "message": str(e)}
     
     def insert(self, key: str, value: str) -> dict:
         """Insert a key-value pair into the correct node."""
@@ -279,10 +288,7 @@ class ChordNode:
 
         # Normalize the successor pointer.
         succ = self.successor
-        if isinstance(succ, dict):
-            succ = normalize_node(succ)
-        elif isinstance(succ, list):
-            succ = tuple(succ)
+        succ = normalize_node(succ)
         
         # If our successor is ourself (or invalid), return self.
         if succ == self_id:
@@ -307,7 +313,8 @@ class ChordNode:
         return succ
     
     def update_predecessor(self, node_info):
-        new_pred = (node_info["ip"], node_info["port"], node_info["node_id"])
+        #new_pred = (node_info["ip"], node_info["port"], node_info["node_id"])
+        new_pred = normalize_node(node_info)
         
         # Normalize existing predecessor if necessary.
         if self.predecessor is not None:
@@ -323,16 +330,22 @@ class ChordNode:
         if in_range(new_pred[2], self.predecessor[2], self.node_id, include_end=False):
             self.predecessor = new_pred
             print(f"[UPDATE] New predecessor updated to: {self.predecessor}")
-        else:
-            print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
+        #else:
+            #print(f"[WARNING] Ignored invalid predecessor update: {node_info}")
 
     def reset_predecessor(self):
         """Reset the predecessor to allow a proper update."""
         print(f"[RESET] Predecessor reset before updating.")
         self.predecessor = None
     
+    def reset_successor(self):
+        """Reset the successor to allow a proper update."""
+        print(f"[RESET] Successor reset before updating.")
+        self.successor = None
+    
     def update_successor(self, node_info):
-        new_succ = (node_info["ip"], node_info["port"], node_info["node_id"])
+        #new_succ = (node_info["ip"], node_info["port"], node_info["node_id"])
+        new_succ = normalize_node(node_info)
 
         # Normalize existing successor if necessary.
         if self.successor is not None:
@@ -348,8 +361,8 @@ class ChordNode:
         if in_range(new_succ[2], self.node_id, self.successor[2], include_end=False):
             self.successor = new_succ
             print(f"[UPDATE] New successor updated to: {self.successor}")
-        else:
-            print(f"[WARNING] Ignored invalid successor update: {node_info}")
+        #else:
+            #print(f"[WARNING] Ignored invalid successor update: {node_info}")
 
     def handle_global_query(self, request: dict) -> dict:
         """
@@ -366,15 +379,13 @@ class ChordNode:
         # Merge this node's local data with collected data
         collected_data.update(self.data_store)
 
+        self.successor = normalize_node(self.successor)
+
         # If this query has looped back to the origin, return the collected data
-        print(f"origin: {origin}")
         if not initial and origin == (self.ip, self.port, self.node_id):
             return {"status": "success", "data": collected_data}
         
         # If only one node in the ring, return data directly
-        print(f"self.successor: {self.successor}")
-        print(f"(self.ip, self.port, self.node_id): {tuple([self.ip, self.port, self.node_id])}")
-
         if self.successor == tuple([self.ip, self.port, self.node_id]):
             return {"status": "success", "data": collected_data}
 
@@ -417,8 +428,6 @@ class ChordNode:
             "key": key
         })
         return response if response else {"status": "error", "message": "Query failed"}
-
-
 
     def query(self, key: str) -> dict:
         """Entry point for query requests initiated by this node."""
@@ -469,7 +478,7 @@ class ChordNode:
                 del self.data_store[key_id]
                 print(f"[DELETE] Key '{key}' deleted from node {self.node_id}")
                 self.replicate_delete(key, remaining=self.replication_factor - 1)
-                return {"status": "success", "message": f"Key '{key}' deleted"}
+                return {"status": "success", "message": f"Key {key} deleted"}
             else:
                 print(f"[DELETE] Key '{key}' not found at node {self.node_id}")
                 return {"status": "error", "message": "Key not found"}
@@ -563,17 +572,15 @@ class ChordNode:
             print(f"[ERROR] Socket error while contacting {address}: {e}")
 
         return {"status": "error", "message": "Node unreachable"}
-
-        
+  
     def run(self):
         threading.Thread(target=self.start_server, daemon=True).start()
         self.join_ring()
-        while True:
-            try:
-                cmd = input(f"[NODE {self.node_id}] Enter command: ").strip()
-            except KeyboardInterrupt:
-                print("\n[EXIT] Shutting down node.")
-                break
+        try:
+            while True:
+                continue
+        except KeyboardInterrupt:
+            print("\n[EXIT] Shutting down node.")
 
 if __name__ == "__main__":
     import sys
