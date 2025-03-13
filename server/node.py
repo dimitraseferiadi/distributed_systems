@@ -696,34 +696,64 @@ class ChordNode:
         else:
             return {"status": "success", "message": "Delete committed at tail", "node": self.node_id}
 
+
     def repair_replication(self):
-        # Iterate over a copy of the data_store to avoid iteration-modification errors.
+        """
+        Repairs the chain replication for keys stored locally in a linearizable setting.
+        
+        For each key:
+        - Determine the correct primary (chain head) for the key using find_successor.
+        - If this node is the primary, re-initiate chain replication.
+        - If this node is not the primary, forward the key to the correct primary.
+        """
+        
+        # If there's only one node in the ring, no replication repair is needed.
+        if self.successor == (self.ip, self.port, self.node_id):
+            print(f"[REPAIR] Single-node ring detected. No replication repair needed.")
+            return {"status": "success"}
+        
+        # Iterate over a copy of the keys so that deletion during iteration is safe.
         for key_id, value in list(self.data_store.items()):
-            # Determine the current primary responsible for key_id.
-            current_primary = self.find_successor(key_id)
-            if current_primary != (self.ip, self.port, self.node_id):
-                # The responsible node has changed (e.g. due to departure).
-                print(f"[REPAIR] Key {key_id} no longer belongs to node {self.node_id}. Forwarding to new primary {current_primary}")
-                # Remove key from local store.
-                del self.data_store[key_id]
-                # Forward the key to the new primary to initiate chain replication.
-                message = {
-                    "type": "chain_insert_replica",
-                    "key_id": key_id,
-                    "value": value,
-                    "remaining": self.replication_factor - 1
-                }
-                self.send_message((current_primary[0], current_primary[1]), message)
+            # Determine the correct primary (chain head) for this key.
+            primary = self.find_successor(key_id)
+            
+            if primary == (self.ip, self.port, self.node_id):
+                # This node is the primary for the key.
+                print(f"[REPAIR] Node {self.node_id} is primary for key {key_id}. Re-initiating chain replication.")
+                if self.replication_factor > 1:
+                    msg = {
+                        "type": "chain_insert_replica",
+                        "key_id": key_id,
+                        "value": value,
+                        "remaining": self.replication_factor - 1
+                    }
+                    response = self.send_message((self.successor[0], self.successor[1]), msg)
+                    if response.get("status") != "success":
+                        print(f"[REPAIR] Warning: Chain replication for key {key_id} failed. Response: {response}")
+                    # The primary always keeps the key.
+                else:
+                    print(f"[REPAIR] Replication factor is 1. No chain replication required for key {key_id}.")
             else:
-                # This node is still responsible; re-establish replication along the chain.
-                print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
-                message = {
+                # This node is not the primary. The key should be re-inserted via the primary.
+                primary = self.find_successor(key_id)
+                if primary == (self.ip, self.port, self.node_id):
+                    # Should not occur because is_responsible_for_key would be True.
+                    print(f"[REPAIR] Unexpected: is_responsible_for_key inconsistency for key {key_id}.")
+                    continue
+                
+                print(f"[REPAIR] Node {self.node_id} is not primary for key {key_id}. Forwarding to primary {primary}.")
+                msg = {
                     "type": "chain_insert_replica",
                     "key_id": key_id,
                     "value": value,
-                    "remaining": self.replication_factor - 1,
+                    "remaining": self.replication_factor
                 }
-                self.send_message((self.successor[0], self.successor[1]), message)
+                response = self.send_message((primary[0], primary[1]), msg)
+                if response.get("status") == "success":
+                    print(f"[REPAIR] Key {key_id} successfully forwarded to primary {primary}.")
+                else:
+                    print(f"[REPAIR] Failed to forward key {key_id} to primary {primary}. Response: {response}")
+        
         return {"status": "success"}
 
 

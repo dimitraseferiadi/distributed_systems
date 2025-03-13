@@ -14,7 +14,7 @@ NUM_NODES = 3
 BASE_PORT = 6000  
 
 REPLICATION_FACTOR = 3
-REPLICATION_CONSISTENCY = "linearizability"
+REPLICATION_CONSISTENCY = "linearizabilityy"
 
 # Start Windows Terminal command
 wt_cmd = 'wt new-tab'
