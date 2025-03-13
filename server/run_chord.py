@@ -32,10 +32,10 @@ wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_
 time.sleep(2)
 wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+2} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
 time.sleep(2)
-#wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+3} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
-#time.sleep(2)
-#wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+4} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
-#time.sleep(2)
+wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+3} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
+time.sleep(2)
+wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+4} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
+time.sleep(2)
 #wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+5} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'
 #time.sleep(2)
 #wt_cmd += f' ; split-pane -p 50 -V cmd /k "python {NODE_SCRIPT} {NODE_IP} {BASE_PORT+6} {REPLICATION_FACTOR} {REPLICATION_CONSISTENCY} {BOOTSTRAP_IP} {BOOTSTRAP_PORT}"'

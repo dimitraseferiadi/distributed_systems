@@ -574,7 +574,7 @@ class ChordNode:
         else:
             # We're either the tail or this is already a forwarded tail request; serve the read.
             if key_id in self.data_store:
-                return {"status": "success", "value": self.data_store[key_id], "port": self.port}
+                return {"status": "success", "value": self.data_store[key_id]}
             else:
                 return {"status": "error", "message": "Key not found"}
 
