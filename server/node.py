@@ -213,12 +213,7 @@ class ChordNode:
                 return {"status": "success", "node": self.node_id}
             elif req_type == "repair_replication":
                 if self.replication_consistency == "linearizability":
-                    for key_id, value in list(self.data_store.items()):
-                        if self.is_responsible_for_key(key_id):
-                            print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
-                            # Send a chain replication repair message using the hashed key
-                            self.chain_insert_replica(key_id=str(key_id), value=value, remaining=self.replication_factor - 1)
-                    return {"status": "success"}
+                    self.repair_replication()
                 else:
                     for key_id, value in self.data_store.items():
                         if self.is_responsible_for_key(key_id):
@@ -664,6 +659,37 @@ class ChordNode:
             return self.send_message((self.successor[0], self.successor[1]), message)
         else:
             return {"status": "success", "message": "Delete committed at tail", "node": self.node_id}
+
+    def repair_replication(self):
+        # Iterate over a copy of the data_store to avoid iteration-modification errors.
+        for key_id, value in list(self.data_store.items()):
+            # Determine the current primary responsible for key_id.
+            current_primary = self.find_successor(key_id)
+            if current_primary != (self.ip, self.port, self.node_id):
+                # The responsible node has changed (e.g. due to departure).
+                print(f"[REPAIR] Key {key_id} no longer belongs to node {self.node_id}. Forwarding to new primary {current_primary}")
+                # Remove key from local store.
+                del self.data_store[key_id]
+                # Forward the key to the new primary to initiate chain replication.
+                message = {
+                    "type": "chain_insert_replica",
+                    "key_id": key_id,
+                    "value": value,
+                    "remaining": self.replication_factor - 1
+                }
+                self.send_message((current_primary[0], current_primary[1]), message)
+            else:
+                # This node is still responsible; re-establish replication along the chain.
+                print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
+                message = {
+                    "type": "chain_insert_replica",
+                    "key_id": key_id,
+                    "value": value,
+                    "remaining": self.replication_factor - 1,
+                }
+                self.send_message((self.successor[0], self.successor[1]), message)
+        return {"status": "success"}
+
 
     def join_ring(self):
         print(f"[JOIN] Node {self.node_id} attempting to join via bootstrap {self.bootstrap_ip}:{self.bootstrap_port}")
