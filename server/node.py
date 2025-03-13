@@ -484,15 +484,13 @@ class ChordNode:
 
         if self.replication_consistency == "linearizability":
             # For each key in the data store, request the value from the tail node.
-            for key_id in self.data_store:
+            for key_id in list(self.data_store):
                 # Identify the tail node for each key.
                 tail = self.get_tail_for_key(key_id)
 
                 # If this node is the tail, read the value directly.
                 if (self.ip, self.port, self.node_id) == tail:
                     collected_data[key_id] = self.data_store[key_id]
-                else:
-                    pass
         else:
             # Merge this node's local data with collected data
             collected_data.update(self.data_store)
@@ -780,7 +778,7 @@ class ChordNode:
                 if isinstance(address, dict):
                     address = (address["ip"], address["port"])
                 
-                s.settimeout(3)
+                s.settimeout(30)
                 s.connect(address)
                 s.send(json.dumps(message).encode())
 
