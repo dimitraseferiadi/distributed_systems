@@ -281,7 +281,6 @@ class ChordNode:
                 if next_node != (self.ip, self.port, self.node_id):
                     replicas.append(next_node)
                     # For a basic version, get the next successor in the ring.
-                    # (In a full implementation you’d have a finger table.)
                     next_node = self.send_message((next_node[0], next_node[1]), {"type": "get_neighbors"}).get("successor", next_node)
                 else:
                     break
@@ -304,6 +303,7 @@ class ChordNode:
             "key": key,
             "value": value
         })
+
         return response if response else {"status": "error", "message": "Failed to store key"}
 
 
@@ -482,18 +482,8 @@ class ChordNode:
         collected_data = request.get("data", {})
         initial = request.get("initial", False)
 
-        if self.replication_consistency == "linearizability":
-            # For each key in the data store, request the value from the tail node.
-            for key_id in list(self.data_store):
-                # Identify the tail node for each key.
-                tail = self.get_tail_for_key(key_id)
-
-                # If this node is the tail, read the value directly.
-                if (self.ip, self.port, self.node_id) == tail:
-                    collected_data[key_id] = self.data_store[key_id]
-        else:
-            # Merge this node's local data with collected data
-            collected_data.update(self.data_store)
+        # Merge this node's local data with collected data
+        collected_data.update(self.data_store)
 
         self.successor = normalize_node(self.successor)
 
