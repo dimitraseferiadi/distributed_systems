@@ -140,7 +140,7 @@ class ChordNode:
             elif (req_type == "query" and request.get("key") == "*"):
                 new_request = {
                     "type": "query_all",
-                    "origin": (self.ip, self.port, self.node_id),  # this node is the origin
+                    "origin": (self.ip, self.port, self.node_id),
                     "data": self.data_store.copy(),
                     "initial": True 
                 }
@@ -148,10 +148,12 @@ class ChordNode:
             elif req_type == "query_all":
                 return self.handle_global_query(request)
             elif req_type == "query":
+                key = request.get("key")
+                key_id = sha1_hash(key)
                 if self.replication_consistency == "linearizability":
-                    return self.chain_query(request["key"])
+                    return self.chain_query(key_id)
                 else:
-                    return self.normal_query(request["key"])
+                    return self.normal_query(key)
             elif req_type == "delete":
                 if self.replication_consistency == "linearizability":
                     return self.chain_delete_primary(request["key"])
@@ -238,8 +240,9 @@ class ChordNode:
             elif req_type == "chain_insert_replica":
                 return self.chain_insert_replica(request["key_id"], request["value"], request.get("remaining", self.replication_factor - 1))
             elif req_type == "chain_query":
+                key_id = request.get("key_id")
                 forwarded = request.get("forwarded", False)
-                return self.chain_query(request["key"], forwarded)
+                return self.chain_query(str(key_id), forwarded)
             elif req_type == "chain_delete_primary":
                 return self.chain_delete_primary(request["key"])
             elif req_type == "chain_delete_replica":
@@ -479,8 +482,20 @@ class ChordNode:
         collected_data = request.get("data", {})
         initial = request.get("initial", False)
 
-        # Merge this node's local data with collected data
-        collected_data.update(self.data_store)
+        if self.replication_consistency == "linearizability":
+            # For each key in the data store, request the value from the tail node.
+            for key_id in self.data_store:
+                # Identify the tail node for each key.
+                tail = self.get_tail_for_key(key_id)
+
+                # If this node is the tail, read the value directly.
+                if (self.ip, self.port, self.node_id) == tail:
+                    collected_data[key_id] = self.data_store[key_id]
+                else:
+                    pass
+        else:
+            # Merge this node's local data with collected data
+            collected_data.update(self.data_store)
 
         self.successor = normalize_node(self.successor)
 
@@ -514,6 +529,7 @@ class ChordNode:
     def normal_query(self, key: str) -> dict:
         """Handles a normal single-key query."""
         key_id = sha1_hash(key)
+
         if self.is_responsible_for_key(key_id):
             if key_id in self.data_store:
                 value = self.data_store[key_id]
@@ -532,15 +548,14 @@ class ChordNode:
         })
         return response if response else {"status": "error", "message": "Query failed"}
 
-    def chain_query(self, key: str, forwarded: bool = False) -> dict:
-        key_id = sha1_hash(key)
-        
+    def chain_query(self, key_id: str, forwarded: bool = False) -> dict:
+        key_id = int(key_id)
         # If this is not a forwarded (tail) request, check if we are the responsible primary.
         if not forwarded and not self.is_responsible_for_key(key_id):
             successor = self.find_successor(key_id)
             message = {
                 "type": "chain_query",
-                "key": key,
+                "key_id": str(key_id),
                 "forwarded": False  # initial query
             }
             return self.send_message((successor[0], successor[1]), message)
@@ -552,7 +567,7 @@ class ChordNode:
         if (self.ip, self.port, self.node_id) != tail and not forwarded:
             message = {
                 "type": "chain_query",
-                "key": key,
+                "key_id": str(key_id),
                 "forwarded": True 
             }
             return self.send_message((tail[0], tail[1]), message)
@@ -573,25 +588,6 @@ class ChordNode:
             else:
                 break
         return current
-    
-    def query(self, key: str) -> dict:
-        """Entry point for query requests initiated by this node."""
-        if key == "*":
-            if self.successor == (self.ip, self.port, self.node_id):
-                return {"status": "success", "data": self.data_store}
-            collected = self.data_store.copy()
-            response = self.send_message((self.successor[0], self.successor[1]), {
-                "type": "query_all",
-                "origin": (self.ip, self.port, self.node_id),
-                "data": collected,
-                "initial": True
-            })
-            return response
-        else:
-            if self.replication_consistency == "linearizability":
-                return self.chain_query(key)
-            else:
-                return self.normal_query(key)
         
     def stabilize(self):
         """
