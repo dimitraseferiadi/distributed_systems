@@ -6,7 +6,7 @@ import sys
 import time
 
 # Configurations: Set the node's IP & port
-ZIP_FILE = "insert.zip"  # Name of the zip file
+ZIP_FILE = "queries.zip"  # Name of the zip file containing queries
 
 # Function to check node availability
 def check_node_availability(node_ip, node_port):
@@ -42,24 +42,25 @@ def unzip_files(zip_file):
         zip_ref.extractall("unzipped_files")  # Extract into a folder
     return sorted(os.listdir("unzipped_files"))  # Return file names sorted
 
-# Step 2: Insert data into DHT
-def insert_into_dht(node_ip, node_port, key, value):
-    """Sends an insert request to the given DHT node."""
+# Step 2: Query data in DHT
+def query_dht(node_ip, node_port, key):
+    """Sends a query request to the given DHT node."""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((node_ip, node_port))
-            request = {"type": "insert", "key": key, "value": value}
+            request = {"type": "query", "key": key}
             s.send(json.dumps(request).encode())
             response = json.loads(s.recv(4096).decode())
-            print(f"[INSERT] {key}: {value} -> {response['status']}")
+            print(f"[QUERY] {key}: {response['value']}")
     except Exception as e:
-        print(f"[ERROR] Failed to insert {key}: {e}")
+        print(f"[ERROR] Failed to query {key}: {e}")
 
-# Step 3: Process files and insert contents
-def process_files(active_nodes):
+# Step 3: Process query files and query the DHT
+def process_queries(active_nodes):
     files = unzip_files(ZIP_FILE)
     if not files:
         return
+
 
     # Round-robin file distribution among active nodes
     num_nodes = len(active_nodes)
@@ -69,12 +70,12 @@ def process_files(active_nodes):
         node_ip, node_port = active_nodes[node_index]
 
         print(f"[PROCESS] Node {node_ip}:{node_port} handling {file_to_process}")
-        start_time_node = time.time()
+        start_time_node = time.time() 
         with open(os.path.join("unzipped_files", file_to_process), "r") as f:
             for line in f:
                 song = line.strip()
                 if song:
-                    insert_into_dht(node_ip, node_port, song, file_to_process)
+                    query_dht(node_ip, node_port, song)
         print(f"[TIME] {file_to_process} processed in {time.time() - start_time_node:.4f} seconds")
 
     print(f"\n[TOTAL TIME] All requests processed in {time.time() - start_time_total:.4f} seconds")
@@ -101,6 +102,6 @@ if __name__ == "__main__":
         print("[ERROR] No active nodes found! Exiting...")
         sys.exit(1)
 
-    # Process files and insert them into the assigned active nodes
-    process_files(active_nodes)
+    # Process query files and query them on the assigned active nodes
+    process_queries(active_nodes)
 
