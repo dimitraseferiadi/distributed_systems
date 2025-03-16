@@ -96,9 +96,9 @@ def main():
 Commands:
   insert <key> <node_ip> <node_port> <value>  - Insert a key-value pair at a specific node.
   query <key> <node_ip> <node_port>           - Retrieve value for a key from a specific node.
-  delete <key>          - Delete a key-value pair.
-  depart <node_id>     - Remove a node from the system.
-  overlay               - Show the network topology.
+  delete <key> <node_ip> <node_port>          - Delete a key-value pair.
+  depart <node_id>                            - Remove a node from the system.
+  overlay                                     - Show the network topology.
   help                                        - Show this help message.
   exit                                        - Quit the CLI.
             """)
