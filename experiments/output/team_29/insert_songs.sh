@@ -3,9 +3,9 @@
 START_TIME=$(date +%s%N)
 
 # Define hosts (each appears twice for 2 ports)
-hosts=("10.0.36.56" "10.0.36.56" "10.0.36.15" "10.0.36.15" "10.0.36.43" "10.0.36.43" "10.0.36.80" "10.0.36.80" "10.0.36.124" "10.0.36.124")
+hosts=("10.0.36.56" "10.0.36.56" "10.0.36.124" "10.0.36.124" "10.0.36.15" "10.0.36.15" "10.0.36.43" "10.0.36.43" "10.0.36.80" "10.0.36.80")
 
-# Generate unique alphabetical values (A-Z, a-z, AA-ZZ)
+# Generate unique keys (A-Z, a-z, AA-ZZ)
 values=()
 for c in {A..Z}; do values+=("$c"); done
 for c in {a..z}; do values+=("$c"); done
@@ -24,13 +24,14 @@ for i in {0..9}; do
 
   (
     while read -r song_title; do
-      value=${values[value_index]}
-      
+      value=${values[value_index]}  # Generate unique key
+      key=$song_title  # Convert song title to a valid key (replace spaces)
+
       # Run Chordify CLI and pass the insert command
       (
-        echo "insert $song_title $host $port $value"
+        echo "insert \"$key\" \"$host\" \"$port\" \"$value\""
         echo "exit"
-      ) | python3 ~/distributed_systems/server/client.py >> "logs/insert_$port.log" 2>&1  # Log each insert
+      ) | python3 ~/distributed_systems/server/client_with_ports_insert.py >> "logs/insert_$port.log" 2>&1  
 
       ((value_index++))
     done < "insert/insert_0${i}_part.txt"

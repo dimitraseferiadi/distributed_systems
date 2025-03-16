@@ -2,6 +2,35 @@ import socket
 import json
 import shlex  # ✅ Properly handle quoted input
 
+def read_full_response(s):
+    """Read full JSON response from socket."""
+    data = b""
+    while True:
+        chunk = s.recv(4096)
+        if not chunk:
+            break
+        data += chunk  # ✅ Keep appending chunks until full response is received
+
+    try:
+        return json.loads(data.decode())  # ✅ Ensure full JSON is received
+    except json.JSONDecodeError:
+        print("[ERROR] Received incomplete/invalid JSON:", data.decode())
+        return {"status": "error", "message": "Invalid JSON response from server"}
+
+def send_request(address, command_type, data=None):
+    """Send a request to a specified node."""
+    request = {"type": command_type}
+    if data:
+        request.update(data)
+    
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect(address)
+            s.sendall(json.dumps(request).encode())  # ✅ Use sendall() to avoid truncation
+            return read_full_response(s)  # ✅ Use the improved reading function
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 def send_request_2(command_type, data=None):
     """Send a request to the bootstrap node."""
     bootstrap_ip = "10.0.36.56"
@@ -14,46 +43,8 @@ def send_request_2(command_type, data=None):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((bootstrap_ip, bootstrap_port))
-            s.send(json.dumps(request).encode())
-
-            # ✅ Read response in chunks to avoid truncation
-            data = b""
-            while True:
-                chunk = s.recv(4096)  
-                if not chunk:
-                    break
-                data += chunk
-            
-            response = json.loads(data.decode())  # ✅ Ensure full JSON is received
-            return response
-    except json.JSONDecodeError:
-        return {"status": "error", "message": "Invalid JSON response from server"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-def send_request(address, command_type, data=None):
-    """Send a request to a specified node."""
-    request = {"type": command_type}
-    if data:
-        request.update(data)
-    
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect(address)
-            s.send(json.dumps(request).encode())
-
-            # ✅ Read response in chunks to avoid truncation
-            data = b""
-            while True:
-                chunk = s.recv(4096)  
-                if not chunk:
-                    break
-                data += chunk
-            
-            response = json.loads(data.decode())  # ✅ Ensure full JSON is received
-            return response
-    except json.JSONDecodeError:
-        return {"status": "error", "message": "Invalid JSON response from server"}
+            s.sendall(json.dumps(request).encode())  # ✅ Use sendall()
+            return read_full_response(s)  # ✅ Read the full response correctly
     except Exception as e:
         return {"status": "error", "message": str(e)}
 

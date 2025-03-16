@@ -76,7 +76,7 @@ class ChordNode:
     def handle_request(self, client_socket):
         """Handle incoming requests from other nodes or clients."""
         try:
-            raw_message = client_socket.recv(4096)
+            raw_message = client_socket.recv(65536)
             if not raw_message:
                 return
             message = raw_message.decode()

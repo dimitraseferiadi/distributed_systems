@@ -1,0 +1,393 @@
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+Fatal Python error: init_import_site: Failed to import the site module
+Python runtime state: initialized
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen site>", line 643, in <module>
+  File "<frozen site>", line 630, in main
+  File "<frozen site>", line 413, in addsitepackages
+  File "<frozen site>", line 242, in addsitedir
+  File "<frozen site>", line 201, in addpackage
+  File "<string>", line 1, in <module>
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen importlib.util>", line 16, in <module>
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 991, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1124, in get_code
+  File "<frozen importlib._bootstrap_external>", line 753, in _compile_bytecode
+KeyboardInterrupt
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+python3: can't open file '/home/ubuntu/distributed_systems/server/client_with_ports.py': [Errno 2] No such file or directory
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Fatal Python error: init_import_site: Failed to import the site module
+Python runtime state: initialized
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen site>", line 643, in <module>
+  File "<frozen site>", line 630, in main
+  File "<frozen site>", line 413, in addsitepackages
+  File "<frozen site>", line 242, in addsitedir
+  File "<frozen site>", line 201, in addpackage
+  File "<string>", line 1, in <module>
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen importlib.util>", line 16, in <module>
+  File "/usr/lib/python3.12/threading.py", line 6, in <module>
+    import functools
+  File "/usr/lib/python3.12/functools.py", line 18, in <module>
+    from collections import namedtuple
+  File "/usr/lib/python3.12/collections/__init__.py", line 32, in <module>
+    from itertools import chain as _chain
+KeyboardInterrupt
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
+Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "[Errno 111] Connection refused"
+}
+chord> Exiting Chord CLI.
