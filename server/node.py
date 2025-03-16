@@ -75,14 +75,10 @@ class ChordNode:
     def handle_request(self, client_socket):
         """Handle incoming requests from other nodes or clients."""
         try:
-            data = b""
-            while True:
-                packet = client_socket.recv(4096)
-                if not packet:
-                    break
-                data += packet
-            print(f"[DEBUG] Raw message received: {data.decode(errors='ignore')}")
-            message = data.decode()
+            raw_message = client_socket.recv(4096)
+            if not raw_message:
+                return
+            message = raw_message.decode()
 
             try:
                 request = json.loads(message)
