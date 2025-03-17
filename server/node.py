@@ -1,35 +1,10 @@
 import socket
 import threading
-import hashlib
 import json
 import threading
 import time
 
-# Utility function for hashing keys using SHA1
-def sha1_hash(key: str) -> int:
-    return int(hashlib.sha1(key.encode()).hexdigest(), 16)
-
-def in_range(val, start, end, include_end=True):
-    """
-    Check if 'val' is in the circular interval (start, end].
-    When include_end is False, the interval is (start, end).
-    This handles wrap-around in the identifier space.
-    """
-    if start < end:
-        return (start < val <= end) if include_end else (start < val < end)
-    else:
-        # Wrap-around case
-        return (val > start or val <= end) if include_end else (val > start or val < end)
-
-def normalize_node(node):
-    """Ensure that a node is in tuple form: (ip, port, node_id)."""
-    if node is None:
-        return None
-    if isinstance(node, dict):
-        return (node["ip"], node["port"], node["node_id"])
-    elif isinstance(node, list):
-        return tuple(node)
-    return node
+from utils import sha1_hash, in_range, normalize_node
 
 class ChordNode:
     def __init__(self, ip: str, port: int, replication_factor: int, replication_consistency: str = "eventual", bootstrap_ip: str = None, bootstrap_port: int = None):
@@ -265,15 +240,14 @@ class ChordNode:
             print(f"[INSERT] Stored at Node {self.node_id}: {key} → {value}")
         
 
-            # Instead of waiting for replication to finish, spawn async replication.
+            # Instead of waiting for replication to finish, spawn async replication
             replica_message = {
                 "type": "replicate_insert",
                 "key_id": key_id,
                 "value": value,
                 "remaining": self.replication_factor - 1
             }
-            # Get the list of replica nodes. You can implement get_replica_nodes() 
-            # based on your ring structure. Here we assume the successor chain.
+            # Get the list of replica nodes
             replicas = []
             next_node = normalize_node(self.successor)
             for _ in range(self.replication_factor - 1):

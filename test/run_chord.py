@@ -3,7 +3,7 @@ import time
 
 BOOTSTRAP_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/bootstrap.py"
 NODE_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/node.py"
-CLIENT_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/client.py"
+CLIENT_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/test/client_locally.py"
 
 
 BOOTSTRAP_IP = "127.0.0.1"
@@ -14,7 +14,7 @@ NUM_NODES = 3
 BASE_PORT = 6000  
 
 REPLICATION_FACTOR = 3
-REPLICATION_CONSISTENCY = "linearizability"
+REPLICATION_CONSISTENCY = "eventual"
 
 # Start Windows Terminal command
 wt_cmd = 'wt new-tab'

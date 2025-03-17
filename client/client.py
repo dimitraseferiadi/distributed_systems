@@ -1,6 +1,6 @@
 import socket
 import json
-import shlex  # ✅ Properly handle quoted input
+import shlex
 
 def send_request_2(command_type, data=None):
     """Send a request to the bootstrap node."""
@@ -16,7 +16,7 @@ def send_request_2(command_type, data=None):
             s.connect((bootstrap_ip, bootstrap_port))
             s.send(json.dumps(request).encode())
 
-            # ✅ Read response in chunks to avoid truncation
+            # Read response in chunks to avoid truncation
             data = b""
             while True:
                 chunk = s.recv(4096)  
@@ -24,7 +24,7 @@ def send_request_2(command_type, data=None):
                     break
                 data += chunk
             
-            response = json.loads(data.decode())  # ✅ Ensure full JSON is received
+            response = json.loads(data.decode())  # Ensure full JSON is received
             return response
     except json.JSONDecodeError:
         return {"status": "error", "message": "Invalid JSON response from server"}
@@ -42,7 +42,7 @@ def send_request(address, command_type, data=None):
             s.connect(address)
             s.send(json.dumps(request).encode())
 
-            # ✅ Read response in chunks to avoid truncation
+            # Read response in chunks to avoid truncation
             data = b""
             while True:
                 chunk = s.recv(4096)  
@@ -50,7 +50,8 @@ def send_request(address, command_type, data=None):
                     break
                 data += chunk
             
-            response = json.loads(data.decode())  # ✅ Ensure full JSON is received
+            # Ensure full JSON is received
+            response = json.loads(data.decode())  
             return response
     except json.JSONDecodeError:
         return {"status": "error", "message": "Invalid JSON response from server"}
@@ -61,7 +62,8 @@ def main():
     print("Chord DHT CLI - Type 'help' for commands.")
     while True:
         try:
-            command = shlex.split(input("chord> ").strip())  # ✅ Handles quotes correctly
+            # Handling quotes correctly
+            command = shlex.split(input("chord> ").strip())  
         except ValueError as e:
             print(f"[ERROR] Invalid command format: {e}")
             continue
@@ -73,7 +75,7 @@ def main():
         
         if cmd == "insert" and len(command) >= 4:
             key = command[1]
-            value = " ".join(command[4:])  # ✅ Capture full value (multi-word support)
+            value = " ".join(command[4:]) 
             node_ip = command[2]
             node_port = int(command[3])
             response = send_request((node_ip, node_port), "insert", {"key": key, "value": value})
@@ -110,7 +112,6 @@ Commands:
             print("Invalid command. Type 'help' for a list of commands.")
             continue
         
-        # ✅ Prettier response formatting
         print(f"Response: {json.dumps(response, indent=2)}")
 
 if __name__ == "__main__":
