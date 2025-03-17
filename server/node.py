@@ -1,36 +1,10 @@
 import socket
 import threading
-import hashlib
 import json
 import threading
 import time
 
-# Utility function for hashing keys using SHA1
-def sha1_hash(key: str) -> int:
-    return int(hashlib.sha1(key.encode()).hexdigest(), 16)
-
-def in_range(val, start, end, include_end=True):
-    """
-    Check if 'val' is in the circular interval (start, end].
-    When include_end is False, the interval is (start, end).
-    This handles wrap-around in the identifier space.
-    """
-    if start < end:
-        return (start < val <= end) if include_end else (start < val < end)
-    else:
-        # Wrap-around case
-        return (val > start or val <= end) if include_end else (val > start or val < end)
-
-def normalize_node(node):
-    """Ensure that a node is in tuple form: (ip, port, node_id)."""
-    if node is None:
-        return None
-    if isinstance(node, dict):
-        return (node["ip"], node["port"], node["node_id"])
-    elif isinstance(node, list):
-        return tuple(node)
-    return node
-
+from utils import sha1_hash, in_range, normalize_node
 
 class ChordNode:
     def __init__(self, ip: str, port: int, replication_factor: int, replication_consistency: str = "eventual", bootstrap_ip: str = None, bootstrap_port: int = None):
@@ -117,7 +91,7 @@ class ChordNode:
         """Asynchronously replicate a write message to a list of replicas."""
         def replicate():
             # Add a small delay to simulate lazy propagation
-            time.sleep(3)
+            time.sleep(1)
             for replica in replica_list:
                 # Send the replication message to each replica
                 self.send_message((replica[0], replica[1]), message)
@@ -233,7 +207,7 @@ class ChordNode:
                     for key_id, value in self.data_store.items():
                         if self.is_responsible_for_key(key_id):
                             print(f"[REPAIR] Re-replicating key {key_id} from node {self.node_id}")
-                            self.replicate_insert(key_id=(key_id), value=value, remaining=self.replication_factor - 1)
+                            self.replicate_insert(key_id=str(key_id), value=value, remaining=self.replication_factor - 1)
                     return {"status": "success"}
             elif req_type == "chain_insert_primary":
                 return self.chain_insert_primary(request["key"], request["value"])
@@ -242,7 +216,7 @@ class ChordNode:
             elif req_type == "chain_query":
                 key_id = request.get("key_id")
                 forwarded = request.get("forwarded", False)
-                return self.chain_query((key_id), forwarded)
+                return self.chain_query(str(key_id), forwarded)
             elif req_type == "chain_delete_primary":
                 return self.chain_delete_primary(request["key"])
             elif req_type == "chain_delete_replica":
@@ -261,23 +235,22 @@ class ChordNode:
         print(f"[INSERT] Key: {key} → Hash ID: {key_id}")
         if self.is_responsible_for_key(key_id):
             if key_id in self.data_store:
-                self.data_store[key_id].append(value)  # Append new value
+                # Append the new value
+                self.data_store[key_id].append(value) 
             else:
-                self.data_store[key_id] = [value]  # Create a list for the first value
+                # Create a list for the first value
+                self.data_store[key_id] = [value]
 
             print(f"[INSERT] Stored at Node {self.node_id}: {key} → {self.data_store[key_id]}")
 
-        
-
-            # Instead of waiting for replication to finish, spawn async replication.
+            # Instead of waiting for replication to finish, spawn async replication
             replica_message = {
                 "type": "replicate_insert",
                 "key_id": key_id,
                 "value": value,
                 "remaining": self.replication_factor - 1
             }
-            # Get the list of replica nodes. You can implement get_replica_nodes() 
-            # based on your ring structure. Here we assume the successor chain.
+            # Get the list of replica nodes
             replicas = []
             next_node = normalize_node(self.successor)
             for _ in range(self.replication_factor - 1):
@@ -292,7 +265,7 @@ class ChordNode:
             self.async_replicate(replica_message, replicas)
         
             return {"status": "success", "node": self.node_id, "message": "Key stored (primary) – replication in progress"}
-    
+
         # Otherwise, forward the request to the correct node
         # Look up the correct successor using the key's hash
         successor = self.find_successor(key_id)
@@ -300,7 +273,7 @@ class ChordNode:
             self.data_store.setdefault(key_id, []).append(value)
             print(f"[INSERT] (After lookup) Key belongs here. Stored locally at Node {self.node_id}")
             return {"status": "success", "node": self.node_id, "message": "Key stored locally"}
-    
+
         response = self.send_message((successor[0], successor[1]), {
             "type": "insert",
             "key": key,
@@ -308,7 +281,6 @@ class ChordNode:
         })
 
         return response if response else {"status": "error", "message": "Failed to store key"}
-
 
     def replicate_insert(self, key_id: str, value: str, remaining: int):
         if remaining <= 0:
@@ -331,7 +303,7 @@ class ChordNode:
         if not self.is_responsible_for_key(key_id):
             successor = self.find_successor(key_id)
             message = {
-                "type": "insert",
+                "type": "chain_insert_primary",
                 "key": key,
                 "value": value
             }
@@ -518,7 +490,7 @@ class ChordNode:
         collected_data.update(successor_data)
 
         return {"status": "success", "data": collected_data}
-
+    
     def normal_query(self, key: str) -> dict:
         """Handles a normal single-key query with proper termination conditions."""
         key_id = sha1_hash(key)
@@ -549,6 +521,7 @@ class ChordNode:
 
         return response
 
+        
     def chain_query(self, key_id: str, forwarded: bool = False) -> dict:
         key_id = int(key_id)
         # If this is not a forwarded (tail) request, check if we are the responsible primary
@@ -556,7 +529,7 @@ class ChordNode:
             successor = self.find_successor(key_id)
             message = {
                 "type": "chain_query",
-                "key_id": (key_id),
+                "key_id": str(key_id),
                 "forwarded": False
             }
             return self.send_message((successor[0], successor[1]), message)
@@ -568,7 +541,7 @@ class ChordNode:
         if (self.ip, self.port, self.node_id) != tail and not forwarded:
             message = {
                 "type": "chain_query",
-                "key_id": (key_id),
+                "key_id": str(key_id),
                 "forwarded": True 
             }
             return self.send_message((tail[0], tail[1]), message)
@@ -804,38 +777,25 @@ class ChordNode:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 if isinstance(address, dict):
                     address = (address["ip"], address["port"])
+                
                 s.settimeout(30)
                 s.connect(address)
                 s.send(json.dumps(message).encode())
-                
-                # Read the full response in chunks
-                data = b""
-                while True:
-                    try:
-                        chunk = s.recv(4096)
-                        if not chunk:
-                            break
-                        data += chunk
-                    except socket.timeout:
-                        break  # Exit if timeout occurs during recv
 
-                if data:
-                    return json.loads(data.decode())
-                else:
-                    return {}
+                response = s.recv(4096).decode()
+                return json.loads(response) if response else {}
         except socket.timeout:
             print(f"[ERROR] Timeout while connecting to {address}")
         except ConnectionRefusedError:
             print(f"[ERROR] Connection refused by {address}")
         except socket.error as e:
             print(f"[ERROR] Socket error while contacting {address}: {e}")
+
         return {"status": "error", "message": "Node unreachable"}
-
-
+  
     def run(self):
         threading.Thread(target=self.start_server, daemon=True).start()
         self.join_ring()
-        self.stabilize()  # Force stabilization immediately:
         try:
             while True:
                 continue
