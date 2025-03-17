@@ -114,10 +114,6 @@ Commands:
         
         print(f"Response: {json.dumps(response, indent=2)}")
 
-if __name__ == "__main__":
-    from hashlib import sha1
-    def sha1_hash(key: str) -> int:
-        return int(sha1(key.encode()).hexdigest(), 16)
-    
+if __name__ == "__main__":    
     main()
 
