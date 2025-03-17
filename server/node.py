@@ -327,7 +327,7 @@ class ChordNode:
         if not self.is_responsible_for_key(key_id):
             successor = self.find_successor(key_id)
             message = {
-                "type": "insert",
+                "type": "chain_insert_primary",
                 "key": key,
                 "value": value
             }
