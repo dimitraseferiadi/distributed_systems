@@ -14,7 +14,7 @@ class BootstrapNode(ChordNode):
         # Ensure thread safety
         self.lock = threading.Lock()  
 
-        # Start server thread to listen for join requests.
+        # Start server thread to listen for join requests
         self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
         
@@ -29,41 +29,44 @@ class BootstrapNode(ChordNode):
         bootstrap_info = {"ip": self.ip, "port": self.port, "node_id": self.node_id}
         
         with self.lock:
-            # Ensure the bootstrap node is in the nodes list.
+            # Ensure the bootstrap node is in the nodes list
             if not any(node["node_id"] == self.node_id for node in self.nodes):
                 self.nodes.append(bootstrap_info)
             if not any(node["node_id"] == self.node_id for node in self.join_order):
                 self.join_order.append(bootstrap_info)
             
-            # Check for duplicates.
+            # Check for duplicates
             if any(node["node_id"] == new_node_info["node_id"] for node in self.nodes):
                 return {"status": "error", "message": "Node already exists"}
             if any(node["node_id"] == new_node_info["node_id"] for node in self.join_order):
                 return {"status": "error", "message": "Node already exists"}
             
-            # Add the new node.
+            # Add the new node
             self.nodes.append(new_node_info)
             self.join_order.append(new_node_info)
             self.nodes.sort(key=lambda node: node["node_id"])
             
-            # Determine the new node's neighbors.
+            # Determine the new node's neighbors
             predecessor, successor = self.find_neighbors(new_node_info["node_id"])
             
-            # Find the bootstrap node in the sorted list.
+            # Find the bootstrap node in the sorted list
             bootstrap_index = next(i for i, node in enumerate(self.nodes) if node["node_id"] == self.node_id)
-            # The new successor for bootstrap is the next node in the sorted order.
+            # The new successor for bootstrap is the next node in the sorted order
             new_bootstrap_successor = self.nodes[(bootstrap_index + 1) % len(self.nodes)]
             if new_bootstrap_successor["node_id"] != self.node_id:
                 self.successor = new_bootstrap_successor
                 print(f"[BOOTSTRAP] Updated bootstrap successor to: {self.successor}")
             else:
-                # Only bootstrap exists.
+                # Only bootstrap exists
                 self.successor = bootstrap_info
             
-            # Notify the new node's neighbors so that they update their pointers.
+            # Notify the new node's neighbors so that they update their pointers
             self.send_message(predecessor, {"type": "update_successor", "node_info": new_node_info})
             self.send_message(successor, {"type": "update_predecessor", "node_info": new_node_info})
         
+        self.predecessor = normalize_node(self.predecessor)
+        self.successor = normalize_node(self.successor)
+
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
     
@@ -140,7 +143,7 @@ class BootstrapNode(ChordNode):
                     new_bootstrap_successor["node_id"])
                 print(f"[BOOTSTRAP] Updated successor to: {self.successor}")
 
-            # Trigger replication repair on the successor so that keys are re-replicated properly.
+            # Trigger replication repair on the successor so that keys are re-replicated properly
             if successor:
                 self.send_message(successor, {"type": "repair_replication"})
         return {"status": "success", "message": f"Node {departing_node_id} successfully removed from the network"}
@@ -176,7 +179,7 @@ class BootstrapNode(ChordNode):
         """
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.settimeout(1)  # Quick timeout to avoid long delays
+                s.settimeout(1)
                 s.connect((node["ip"], node["port"]))
             return True
         except (socket.error, ConnectionRefusedError):
@@ -202,7 +205,7 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) < 5:
         print("Usage: python bootstrap.py <ip> <port> <replication_factor> <replication_consistency>")
-        # python bootstrap.py 127.0.0.1 5000
+        # python bootstrap.py 127.0.0.1 5000 2 linearizability
         exit(1)
 
     ip = sys.argv[1]
@@ -211,7 +214,7 @@ if __name__ == "__main__":
     replication_consistency = sys.argv[4]
     bootstrap = BootstrapNode(ip, port, replication_factor, replication_consistency)
 
-    # Keep the bootstrap node running indefinitely.
+    # Keep the bootstrap node running indefinitely
     try:
         while True:
             continue

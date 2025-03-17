@@ -26,12 +26,13 @@ for i in {0..9}; do
     while read -r song_title; do
       value=${values[value_index]}  # Generate unique key
       key=$song_title  # Convert song title to a valid key (replace spaces)
+	  echo "[DEBUG] Inserting: insert \"$key\" $host $port \"$value\""
 
       # Run Chordify CLI and pass the insert command
       (
         echo "insert \"$key\" \"$host\" \"$port\" \"$value\""
         echo "exit"
-      ) | python3 ~/distributed_systems/server/client_with_ports_insert.py >> "logs/insert_$port.log" 2>&1  
+      ) | python3 ~/distributed_systems/server/client_with_ports_insert.py >> "logs/insert_linear.log" 2>&1  
 
       ((value_index++))
     done < "insert/insert_0${i}_part.txt"

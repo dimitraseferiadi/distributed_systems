@@ -12,7 +12,8 @@ def read_full_response(s):
         data += chunk  # ✅ Keep appending chunks until full response is received
 
     try:
-        return json.loads(data.decode())  # ✅ Ensure full JSON is received
+        response_str = data.decode()
+        return json.loads(response_str)  # ✅ Ensure full JSON is received
     except json.JSONDecodeError:
         print("[ERROR] Received incomplete/invalid JSON:", data.decode())
         return {"status": "error", "message": "Invalid JSON response from server"}
