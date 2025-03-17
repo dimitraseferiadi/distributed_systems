@@ -1,4 +1,5 @@
-from node import ChordNode, normalize_node
+from node import ChordNode
+from utils import normalize_node
 import socket
 import threading
 
@@ -168,8 +169,8 @@ class BootstrapNode(ChordNode):
             if self.is_node_alive(node):
                 active_nodes.append(node)
 
-        with self.lock: 
-            self.join_order = active_nodes 
+        #with self.lock: 
+        self.join_order = active_nodes 
 
         return {"status": "success", "overlay": active_nodes}
 

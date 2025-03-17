@@ -12,7 +12,7 @@ NODE_IP = "127.0.0.1"
 NUM_NODES = 10
 BASE_PORT = 5001  
 REPLICATION_FACTOR = 2
-REPLICATION_CONSISTENCY = "eventual"  # Default to "e" (eventual consistency)
+REPLICATION_CONSISTENCY = "eventual"
 
 
 # Start Bootstrap Node
