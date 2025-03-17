@@ -82,6 +82,8 @@ def main():
             response = send_request((node_ip, node_port), "query", {"key": key})
         elif cmd == "delete" and len(command) >= 3:
             key = command[1]
+            node_ip = command[2]
+            node_port = int(command[3])
             response = send_request((node_ip, node_port), "delete", {"key": key})
         elif cmd == "depart":
             node_id = command[1]
