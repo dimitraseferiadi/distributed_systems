@@ -488,29 +488,38 @@ class ChordNode:
         collected_data.update(successor_data)
 
         return {"status": "success", "data": collected_data}
-
+    
     def normal_query(self, key: str) -> dict:
-        """Handles a normal single-key query."""
+        """Handles a normal single-key query with proper termination conditions."""
         key_id = sha1_hash(key)
-
-        if self.is_responsible_for_key(key_id):
-            if key_id in self.data_store:
-                value = self.data_store[key_id]
-                return {"status": "success", "value": value}
-            else:
-                return {"status": "error", "message": "Key not found"}
         
-        successor = self.find_successor(key_id)
+        if key_id in self.data_store:
+            value = self.data_store[key_id]
+            return {"status": "success", "value": value, "port": self.port}
+        
+        # Check if this node is responsible for the key
+        if self.is_responsible_for_key(key_id):
+            # If this node is the primary but the key isn't here, it's truly missing.
+            print(f"[QUERY] Node {self.node_id} is responsible for key {key_id}, but key not found.")
+            return {"status": "error", "message": "Key not found"}
 
-        if successor == [self.ip, self.port, self.node_id]:
-            print(f"[WARNING] Detected self-loop while querying {key}. Returning error.")
+        # Termination condition: If the successor is itself, the key is not in the ring.
+        if self.successor == (self.ip, self.port, self.node_id):
             return {"status": "error", "message": "Key not found in ring"}
-        response = self.send_message((successor[0], successor[1]), {
+
+        # Forward the query to the successor
+        response = self.send_message((self.successor[0], self.successor[1]), {
             "type": "query",
             "key": key
         })
-        return response if response else {"status": "error", "message": "Query failed"}
 
+        # If the query returns to this node or fails entirely, the key does not exist
+        if not response or response.get("status") == "error":
+            return {"status": "error", "message": "Key not found"}
+
+        return response
+
+        
     def chain_query(self, key_id: str, forwarded: bool = False) -> dict:
         key_id = int(key_id)
         # If this is not a forwarded (tail) request, check if we are the responsible primary
