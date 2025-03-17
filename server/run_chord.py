@@ -3,7 +3,7 @@ import time
 
 BOOTSTRAP_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/bootstrap.py"
 NODE_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/node.py"
-CLIENT_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/client_with_ports_insert.py"
+CLIENT_SCRIPT = "C:/Users/dhmht/Downloads/distributed_systems/server/client.py"
 
 
 BOOTSTRAP_IP = "127.0.0.1"

@@ -64,6 +64,9 @@ class BootstrapNode(ChordNode):
             self.send_message(predecessor, {"type": "update_successor", "node_info": new_node_info})
             self.send_message(successor, {"type": "update_predecessor", "node_info": new_node_info})
         
+        self.predecessor = normalize_node(self.predecessor)
+        self.successor = normalize_node(self.successor)
+
         print(f"[BOOTSTRAP] Node {new_node_info['node_id']} joined. Current nodes: {self.nodes}")
         return {"status": "success", "predecessor": predecessor, "successor": successor}
     
