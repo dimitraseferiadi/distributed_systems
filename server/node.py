@@ -185,7 +185,7 @@ class ChordNode:
                 key_id = request["key_id"]
                 value = request["value"]
                 remaining = request.get("remaining", 0)
-                self.data_store[key_id] = value
+                self.data_store.setdefault(key_id, []).append(value)
                 print(f"[REPLICATE INSERT] Node {self.node_id} stored replica for key {key_id}")
                 if remaining > 1:
                     self.replicate_insert(key_id, value, remaining=remaining - 1)
@@ -233,12 +233,15 @@ class ChordNode:
         """Insert a key-value pair into the correct node."""
         key_id = sha1_hash(key)
         print(f"[INSERT] Key: {key} → Hash ID: {key_id}")
-
-        # Check if this node is responsible for storing the key
         if self.is_responsible_for_key(key_id):
-            self.data_store[key_id] = value
-            print(f"[INSERT] Stored at Node {self.node_id}: {key} → {value}")
-        
+            if key_id in self.data_store:
+                # Append the new value
+                self.data_store[key_id].append(value) 
+            else:
+                # Create a list for the first value
+                self.data_store[key_id] = [value]
+
+            print(f"[INSERT] Stored at Node {self.node_id}: {key} → {self.data_store[key_id]}")
 
             # Instead of waiting for replication to finish, spawn async replication
             replica_message = {
@@ -262,15 +265,15 @@ class ChordNode:
             self.async_replicate(replica_message, replicas)
         
             return {"status": "success", "node": self.node_id, "message": "Key stored (primary) – replication in progress"}
-    
+
         # Otherwise, forward the request to the correct node
         # Look up the correct successor using the key's hash
         successor = self.find_successor(key_id)
         if successor == [self.ip, self.port, self.node_id]:
-            self.data_store[key_id] = value
+            self.data_store.setdefault(key_id, []).append(value)
             print(f"[INSERT] (After lookup) Key belongs here. Stored locally at Node {self.node_id}")
             return {"status": "success", "node": self.node_id, "message": "Key stored locally"}
-    
+
         response = self.send_message((successor[0], successor[1]), {
             "type": "insert",
             "key": key,
@@ -278,7 +281,6 @@ class ChordNode:
         })
 
         return response if response else {"status": "error", "message": "Failed to store key"}
-
 
     def replicate_insert(self, key_id: str, value: str, remaining: int):
         if remaining <= 0:
@@ -308,7 +310,7 @@ class ChordNode:
             return self.send_message((successor[0], successor[1]), message)
         
         # Store locally.
-        self.data_store[key_id] = value
+        self.data_store.setdefault(key_id, []).append(value)
         print(f"[CHAIN INSERT PRIMARY] Node {self.node_id} stored key '{key}'")
         
         # If only one replica or no valid successor, we are also the tail
@@ -325,7 +327,7 @@ class ChordNode:
         return self.send_message((self.successor[0], self.successor[1]), message)
 
     def chain_insert_replica(self, key_id: str, value: str, remaining: int) -> dict:
-        self.data_store[key_id] = value
+        self.data_store.setdefault(key_id, []).append(value)
         print(f"[CHAIN INSERT REPLICA] Node {self.node_id} stored key")
         
         if remaining > 1:
