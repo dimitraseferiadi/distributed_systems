@@ -1,0 +1,10788 @@
+[INFO] Processing requests from request/requests_00.txt on 10.0.36.56:5000...
+[INFO] Processing requests from request/requests_01.txt on 10.0.36.56:5001...
+[INFO] Processing requests from request/requests_02.txt on 10.0.36.124:5002...
+[INFO] Processing requests from request/requests_03.txt on 10.0.36.124:5003...
+[INFO] Processing requests from request/requests_04.txt on 10.0.36.15:5004...
+[INFO] Processing requests from request/requests_05.txt on 10.0.36.15:5005...
+[INFO] Processing requests from request/requests_06.txt on 10.0.36.43:5006...
+[INFO] Processing requests from request/requests_07.txt on 10.0.36.43:5007...
+[INFO] Processing requests from request/requests_08.txt on 10.0.36.80:5008...
+[INFO] Processing requests from request/requests_09.txt on 10.0.36.80:5009...
+[INSERT] Executing: insert "Respect" 10.0.36.80 5009 " 553"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.43 5007 " 583"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "Key not found"
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "Key not found"
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "error",
+  "message": "Key not found"
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.124 5002 " 524"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.43 5007 " 510"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.56 5000 " 528"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.124 5002 " 590"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 561"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.56 5000 " 522"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.56 5000 " 542"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 539"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.80 5008 " 554"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.43 5006 " 516"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 558"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.124 5003 " 523"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 513"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.43 5006 " 575"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 570"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 525"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.124 5003 " 585"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5000 " 582"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5000 " 504"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.80 5008 " 550"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 536"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.43 5007 " 521"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 520"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.56 5000 " 531"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.124 5003 " 584"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.43 5006 " 503"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.124 5003 " 512"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.80 5008 " 551"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 505"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 572"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.43 5007 " 517"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 588"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.80 5008 " 541"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5004 " 526"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.15 5005 " 589"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.124 5002 " 599"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 511"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 597"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 514"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 556"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.15 5004 " 515"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5007 " 555"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 579"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.56 5000 " 596"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 580"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.124 5003 " 571"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5007 " 586"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 557"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.124 5002 " 576"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 518"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.43 5006 " 560"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 578"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.15 5005 " 587"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 501"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.43 5006 " 600"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5004 " 540"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 534"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.43 5007 " 548"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.43 5007 " 509"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 530"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 568"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.56 5001 " 569"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.124 5002 " 552"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.80 5009 " 562"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.124 5003 " 527"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.80 5009 " 537"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.15 5005 " 533"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 507"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.80 5009 " 546"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.56 5001 " 549"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.56 5001 " 559"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.80 5008 " 577"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 594"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.56 5000 " 566"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 565"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.56 5000 " 506"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 593"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 573"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.43 5007 " 563"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.80 5008 " 574"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 581"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 544"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5008
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.56 5000 " 529"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5008 " 532"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 519"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.80 5008 " 538"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5005 " 543"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.43 5006 " 598"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.56 5001 " 545"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 595"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Respect" 10.0.36.43 5006 " 567"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 969432207210325526737328719144474474846745595825
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Like a Rolling Stone" 10.0.36.80 5009 " 547"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 594503878842345689106620227059135264641894666375
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5006
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.15 5004 " 564"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Respect" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 553",
+    " 528",
+    " 522",
+    " 554",
+    " 516",
+    " 550",
+    " 584",
+    " 503",
+    " 512",
+    " 541",
+    " 589",
+    " 560",
+    " 587",
+    " 548",
+    " 559",
+    " 566",
+    " 567"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5002
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.80 5009 " 591"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538",
+    " 564"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.124 5003
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545",
+    " 547"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.43 5007
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545",
+    " 547"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.15 5005 " 508"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538",
+    " 564",
+    " 508"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "What's Going On" 10.0.36.15 5004 " 592"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 1040499584230502937230252314689039828066315699231
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.56 5000 " 502"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[INSERT] Executing: insert "Hey Jude" 10.0.36.15 5004 " 535"
+[INSERT RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "message": "Write committed at tail",
+  "node": 7875819371350328689965791664143894393178181712
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.56 5001
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591",
+    " 502",
+    " 535"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591",
+    " 502",
+    " 535"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.80 5009
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591",
+    " 502",
+    " 535"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545",
+    " 547"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.56 5000
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538",
+    " 564",
+    " 508",
+    " 592"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545",
+    " 547"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591",
+    " 502",
+    " 535"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538",
+    " 564",
+    " 508",
+    " 592"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Like a Rolling Stone" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 583",
+    " 575",
+    " 582",
+    " 585",
+    " 504",
+    " 536",
+    " 520",
+    " 551",
+    " 599",
+    " 514",
+    " 571",
+    " 578",
+    " 600",
+    " 509",
+    " 527",
+    " 577",
+    " 593",
+    " 545",
+    " 547"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "Hey Jude" 10.0.36.15 5005
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 524",
+    " 561",
+    " 542",
+    " 539",
+    " 558",
+    " 523",
+    " 513",
+    " 570",
+    " 525",
+    " 505",
+    " 572",
+    " 588",
+    " 526",
+    " 511",
+    " 597",
+    " 556",
+    " 555",
+    " 579",
+    " 596",
+    " 580",
+    " 586",
+    " 557",
+    " 576",
+    " 518",
+    " 501",
+    " 540",
+    " 534",
+    " 530",
+    " 568",
+    " 552",
+    " 507",
+    " 549",
+    " 594",
+    " 565",
+    " 506",
+    " 573",
+    " 581",
+    " 544",
+    " 532",
+    " 519",
+    " 543",
+    " 598",
+    " 595",
+    " 591",
+    " 502",
+    " 535"
+  ]
+}
+chord> Exiting Chord CLI.
+
+[QUERY] Sending: query "What's Going On" 10.0.36.15 5004
+[QUERY RESPONSE] Chord DHT CLI - Type 'help' for commands.
+chord> Response: {
+  "status": "success",
+  "value": [
+    " 510",
+    " 590",
+    " 521",
+    " 531",
+    " 517",
+    " 515",
+    " 569",
+    " 562",
+    " 537",
+    " 533",
+    " 546",
+    " 563",
+    " 574",
+    " 529",
+    " 538",
+    " 564",
+    " 508",
+    " 592"
+  ]
+}
+chord> Exiting Chord CLI.
+

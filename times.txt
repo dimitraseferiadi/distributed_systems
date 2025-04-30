@@ -1,0 +1,37 @@
+metrhseis
+
+EVENTUAL
+       
+      insert_songs.py                                                             query_songs.py                                                  process_request.py                                      
+1:    All inserts completed in 23.627418515 seconds                All queries completed in 24.111105736 seconds.                    
+      Throughput: 21.161854803 inserts/sec                         Throughput: 20.737331811 queries/sec                              
+   
+
+3:    All inserts completed in 23.882821997 seconds                All queries completed in 24.257781331 seconds                      All requests completed in 26.344626527 seconds
+      Throughput: 20.935549411 inserts/sec                         Throughput: 20.611942748 queries/sec                               Throughput: 18.979202437 requests/sec
+      
+
+5:    All inserts completed in 29.492731373 seconds                All queries completed in 32.523418712 seconds
+      Throughput: 16.953329743 inserts/sec                         Throughput: 15.373537586 queries/sec
+      
+   
+   
+   
+   
+  
+  
+     
+LINEAR
+
+
+       insert_songs.py                                                             query_songs.py                                                  process_request.py                                      
+1:     All inserts completed in 26.487406693 seconds               All queries completed in 31.287728627 seconds
+       Throughput: 18.876895190 inserts/sec                        Throughput: 15.980706236 queries/sec
+
+
+3:     All inserts completed in 28.383095996 seconds               All queries completed in 45.409549585 seconds                            All requests completed in 42.528612878  seconds
+       Throughput: 17.616119117 inserts/sec                        Throughput: 11.010899790 queries/sec                                     Throughput: 11.756790691 requests/sec
+
+
+5:     All inserts completed in 30.313618659  seconds              All queries completed in 55.040225000 seconds
+       Throughput: 16.494236653 inserts/sec                        Throughput: 9.084265189 queries/sec
